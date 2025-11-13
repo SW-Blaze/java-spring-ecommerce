@@ -24,6 +24,11 @@ public class UserController {
         model.addAttribute("fyrez", "from controller with model");
         return "hello";
     }
+
+    @RequestMapping("/admin/user")
+    public String getUserPage() {
+        return "admin/user/create";
+    }
 }
 
 // @RestController
