@@ -1,20 +1,21 @@
 package com.example.ecommerce.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ecommerce.domain.User;
+import com.example.ecommerce.repository.UserRepository;
 import com.example.ecommerce.service.UserService;
 
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -22,8 +23,9 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.handleHello();
-        model.addAttribute("zeryf", test);
+        List<User> arrUsers = this.userService.getAllUserByEmail("1@gmail.com");
+        System.out.println(arrUsers);
+        model.addAttribute("zeryf", "test");
         model.addAttribute("fyrez", "from controller with model");
         return "hello";
     }
@@ -37,6 +39,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User zeryf) {
         System.out.println("run here: " + zeryf);
+        this.userService.handleSaveUser(zeryf);
         return "hello";
     }
 }
