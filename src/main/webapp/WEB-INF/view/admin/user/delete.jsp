@@ -7,7 +7,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>User Detail ${id}</title>
+                <title>Delete user ${id}</title>
 
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,24 +20,21 @@
             <body>
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-12 mx-auto">
+                        <div class="col-md-6 col-12 mx-auto">
                             <div class="d-flex justify-content-between">
-                                <h3>User detail with id = ${id}</h3>
+                                <h3>Delete the user with ${id}</h3>
                             </div>
                             <hr />
-                            <div class="card" style="width: 60%">
-                                <div class="card-header">
-                                    User Information
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${user.id}</li>
-                                    <li class="list-group-item">Email: ${user.email}</li>
-                                    <li class="list-group-item">Full name: ${user.fullName}</li>
-                                    <li class="list-group-item">Phone number: ${user.phone}</li>
-                                    <li class="list-group-item">Address: ${user.address}</li>
-                                </ul>
+                            <div class="alert alert-danger">
+                                Are you sure to delete this user?
                             </div>
-                            <a href="/admin/user" class="btn btn btn-success mt-3">Back</a>
+                            <form:form method="post" action="/admin/user/delete" modelAttribute="newUser">
+                                <div class="mb-3" style="display: none;">
+                                    <label class="form-label">Id:</label>
+                                    <form:input type="text" path="id" class="form-control" />
+                                </div>
+                                <button class="btn btn-danger">Confirm</button>
+                            </form:form>
                         </div>
                     </div>
                 </div>

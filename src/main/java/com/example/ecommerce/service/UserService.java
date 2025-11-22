@@ -35,4 +35,13 @@ public class UserService {
         User zeryf = this.userRepository.save(user);
         return zeryf;
     }
+
+    public User handleUpdateUser(User user) {
+        User zeryf = this.userRepository.save(user);
+        return zeryf;
+    }
+
+    public void deleteAUser(long id) {
+        this.userRepository.deleteById(id);
+    }
 }
