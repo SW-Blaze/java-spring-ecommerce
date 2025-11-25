@@ -1,21 +1,40 @@
 package com.example.ecommerce.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String fullName;
     private String email;
     private String password;
-    private String fullName;
+    private String dateOfBirth;
     private String address;
     private String phone;
+
+    private String avatar;
+
+    // roleId
+    // User
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 
     public long getId() {
         return id;
@@ -65,9 +84,26 @@ public class User {
         this.phone = phone;
     }
 
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-                + ", address=" + address + ", phone=" + phone + "]";
+        return "User [id=" + id + ", fullName=" + fullName + ", email=" + email + ", password=" + password
+                + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar
+                + "]";
     }
 }
