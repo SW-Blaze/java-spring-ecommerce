@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ecommerce.domain.User;
+import com.example.ecommerce.service.UploadService;
 import com.example.ecommerce.service.UserService;
 
 import jakarta.servlet.ServletContext;
@@ -27,11 +28,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
     private final UserService userService;
-    private final ServletContext servletContext;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService, ServletContext servletContext) {
+    public UserController(UserService userService, ServletContext servletContext, UploadService uploadService) {
         this.userService = userService;
-        this.servletContext = servletContext;
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/")
@@ -70,30 +71,8 @@ public class UserController {
     @PostMapping(value = "/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") User zeryf,
             @RequestParam("zeryfFile") MultipartFile file) {
-
-        try {
-            byte[] bytes;
-            bytes = file.getBytes();
-
-            String rootPath = this.servletContext.getRealPath("/resources/images");
-
-            File dir = new File(rootPath + File.separator + "avatar");
-            if (!dir.exists())
-                dir.mkdirs();
-
-            // Create the file on server
-            File serverFile = new File(dir.getAbsolutePath() + File.separator +
-                    +System.currentTimeMillis() + "-" + file.getOriginalFilename());
-
-            BufferedOutputStream stream = new BufferedOutputStream(
-                    new FileOutputStream(serverFile));
-            stream.write(bytes);
-            stream.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        this.userService.handleSaveUser(zeryf);
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        // this.userService.handleSaveUser(zeryf);
         return "redirect:/admin/user";
     }
 
