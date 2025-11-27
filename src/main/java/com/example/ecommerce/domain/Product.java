@@ -1,12 +1,9 @@
 package com.example.ecommerce.domain;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -78,8 +75,8 @@ public class Product {
         return quantity;
     }
 
-    public void setQuantity(long quanity) {
-        this.quantity = quanity;
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
 
     public long getSold() {
@@ -109,7 +106,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", detailDesc="
-                + detailDesc + ", shortDesc=" + shortDesc + ", quanity=" + quantity + ", sold=" + sold + ", factory="
+                + detailDesc + ", shortDesc=" + shortDesc + ", quantity=" + quantity + ", sold=" + sold + ", factory="
                 + factory + ", target=" + target + "]";
     }
 }
