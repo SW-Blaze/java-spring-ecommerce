@@ -1,26 +1,20 @@
 package com.example.ecommerce.controller.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.service.UploadService;
 import com.example.ecommerce.service.UserService;
-
-import jakarta.servlet.ServletContext;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -29,15 +23,12 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, ServletContext servletContext, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
-    }
-
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        return "admin/user/homePage";
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/admin/user")
@@ -72,7 +63,11 @@ public class UserController {
     public String createUserPage(Model model, @ModelAttribute("newUser") User zeryf,
             @RequestParam("zeryfFile") MultipartFile file) {
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        // this.userService.handleSaveUser(zeryf);
+        String hashPassword = this.passwordEncoder.encode(zeryf.getPassword());
+        zeryf.setAvatar(avatar);
+        zeryf.setPassword(hashPassword);
+        zeryf.setRole(this.userService.getRoleByName(zeryf.getRole().getName()));
+        this.userService.handleSaveUser(zeryf);
         return "redirect:/admin/user";
     }
 
@@ -81,8 +76,10 @@ public class UserController {
         User currentUser = this.userService.getUserById(zeryf.getId());
         if (currentUser != null) {
             currentUser.setFullName(zeryf.getFullName());
+            currentUser.setRole(zeryf.getRole());
             currentUser.setPhone(zeryf.getPhone());
             currentUser.setAddress(zeryf.getAddress());
+            // currentUser.setAvatar(zeryf.getAvatar());
 
             this.userService.handleSaveUser(currentUser);
         }

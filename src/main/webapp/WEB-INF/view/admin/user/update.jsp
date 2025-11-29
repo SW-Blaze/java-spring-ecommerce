@@ -33,7 +33,7 @@
                                             <h3>Update a user</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/user/update"
-                                                modelAttribute="newUser">
+                                                modelAttribute="newUser" class="row">
                                                 <div class="mb-3" style="display: none;">
                                                     <label class="form-label">Id:</label>
                                                     <form:input type="text" path="id" class="form-control" />
@@ -43,17 +43,33 @@
                                                     <form:input type="email" path="email" class="form-control"
                                                         disabled="true" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Full name:</label>
                                                     <form:input type="text" path="fullName" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone number:</label>
                                                     <form:input type="text" path="phone" class="form-control" />
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Address:</label>
                                                     <form:input type="text" path="address" class="form-control" />
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role:</label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="zeryfFile" />
+                                                </div>
+                                                <div class="mb-3 col-12">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview">
                                                 </div>
                                                 <button type="submit" class="btn btn-warning">Update</button>
                                             </form:form>
