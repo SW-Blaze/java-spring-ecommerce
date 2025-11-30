@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.service.UploadService;
 import com.example.ecommerce.service.UserService;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -60,26 +64,39 @@ public class UserController {
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User zeryf,
-            @RequestParam("zeryfFile") MultipartFile file) {
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User zeros,
+            BindingResult newUserBindingResult,
+            @RequestParam("zerosFile") MultipartFile file) {
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        // validate
+        if (newUserBindingResult.hasErrors()) {
+            return "/admin/user/create";
+        }
+
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        String hashPassword = this.passwordEncoder.encode(zeryf.getPassword());
-        zeryf.setAvatar(avatar);
-        zeryf.setPassword(hashPassword);
-        zeryf.setRole(this.userService.getRoleByName(zeryf.getRole().getName()));
-        this.userService.handleSaveUser(zeryf);
+        String hashPassword = this.passwordEncoder.encode(zeros.getPassword());
+        zeros.setAvatar(avatar);
+        zeros.setPassword(hashPassword);
+        zeros.setRole(this.userService.getRoleByName(zeros.getRole().getName()));
+        // save
+        // this.userService.handleSaveUser(zeros);
         return "redirect:/admin/user";
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User zeryf) {
-        User currentUser = this.userService.getUserById(zeryf.getId());
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User zeros,
+            @RequestParam("zerosFile") MultipartFile file) {
+        User currentUser = this.userService.getUserById(zeros.getId());
         if (currentUser != null) {
-            currentUser.setFullName(zeryf.getFullName());
-            currentUser.setRole(zeryf.getRole());
-            currentUser.setPhone(zeryf.getPhone());
-            currentUser.setAddress(zeryf.getAddress());
-            // currentUser.setAvatar(zeryf.getAvatar());
+            currentUser.setFullName(zeros.getFullName());
+            currentUser.setRole(zeros.getRole());
+            currentUser.setPhone(zeros.getPhone());
+            currentUser.setAddress(zeros.getAddress());
+            currentUser.setAvatar(zeros.getAvatar());
 
             this.userService.handleSaveUser(currentUser);
         }
@@ -96,8 +113,8 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/delete")
-    public String postDeleteUser(Model model, @ModelAttribute("newUser") User zeryf) {
-        this.userService.deleteAUser(zeryf.getId());
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User zeros) {
+        this.userService.deleteAUser(zeros.getId());
         return "redirect:/admin/user";
     }
 }

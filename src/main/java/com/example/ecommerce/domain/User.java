@@ -10,21 +10,32 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
+    @Size(min = 3, message = "Tên phải có tối thiểu 3 ký tự")
     private String fullName;
+
+    @NotNull
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    @NotNull
+    @Size(min = 2, message = "Mật khẩu phải có tối thiểu 2 ký tự")
     private String password;
-    private String dateOfBirth;
+
     private String address;
     private String phone;
-
     private String avatar;
 
     // roleId
@@ -84,14 +95,6 @@ public class User {
         this.phone = phone;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getAvatar() {
         return avatar;
     }
@@ -119,7 +122,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", fullName=" + fullName + ", email=" + email + ", password=" + password
-                + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar
                 + "]";
     }
 }

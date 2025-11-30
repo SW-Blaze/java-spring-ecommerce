@@ -48,16 +48,31 @@
                                             <form:form method="post" action="/admin/user/create"
                                                 modelAttribute="newUser" class="row" enctype="multipart/form-data">
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorEmail">
+                                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Email:</label>
-                                                    <form:input type="email" path="email" class="form-control" />
+                                                    <form:input type="email" path="email"
+                                                        class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" />
+                                                    ${errorEmail}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorPassword">
+                                                        <form:errors path="password" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Password:</label>
-                                                    <form:input type="password" path="password" class="form-control" />
+                                                    <form:input type="password" path="password"
+                                                        class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" />
+                                                    ${errorPassword}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorfullName">
+                                                        <form:errors path="fullName" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Full name:</label>
-                                                    <form:input type="text" path="fullName" class="form-control" />
+                                                    <form:input type="text" path="fullName"
+                                                        class="form-control ${not empty errorfullName ? 'is-invalid' : ''}" />
+                                                    ${errorfullName}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone number:</label>
@@ -77,7 +92,7 @@
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="avatarFile" class="form-label">Avatar:</label>
                                                     <input class="form-control" type="file" id="avatarFile"
-                                                        accept=".png, .jpg, .jpeg" name="zeryfFile" />
+                                                        accept=".png, .jpg, .jpeg" name="zerosFile" />
                                                 </div>
                                                 <div class="mb-3 col-12">
                                                     <img style="max-height: 250px; display: none;" alt="avatar preview"

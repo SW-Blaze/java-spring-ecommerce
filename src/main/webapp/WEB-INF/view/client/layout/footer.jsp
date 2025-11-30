@@ -9,7 +9,7 @@
                         <div class="col-lg-3">
                             <a href="#">
                                 <h1 class="text-primary mb-0">Laptopshop</h1>
-                                <p class="text-secondary mb-0">@zeryf</p>
+                                <p class="text-secondary mb-0">@zeros</p>
                             </a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Liên Hệ</h4>
                             <p>Address: Hồ Chí Minh</p>
-                            <p>Email: zeryf@gmail.com</p>
+                            <p>Email: zeros@gmail.com</p>
                             <p>Phone: +84 123 4567 89</p>
                             <p>Payment Accepted</p>
                             <img src="/client/img/payment.png" class="img-fluid" alt="">
@@ -66,7 +66,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Zeryf</a>,
+                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>zeros</a>,
                             All right reserved.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">

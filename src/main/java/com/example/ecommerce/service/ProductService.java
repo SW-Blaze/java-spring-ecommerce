@@ -16,13 +16,19 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product handleSaveProduct(Product p) {
-        Product product = this.productRepository.save(p);
-        return product;
+    public Product createProduct(Product pr) {
+        return this.productRepository.save(pr);
     }
 
-    public List<Product> getAllProduct() {
+    public List<Product> fetchProducts() {
         return this.productRepository.findAll();
     }
 
+    public Product fetchProductById(long id) {
+        return this.productRepository.findById(id);
+    }
+
+    public void deleteProduct(long id) {
+        this.productRepository.deleteById(id);
+    }
 }

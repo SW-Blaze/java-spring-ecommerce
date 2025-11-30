@@ -36,13 +36,11 @@ public class UserService {
     }
 
     public User handleSaveUser(User user) {
-        User zeryf = this.userRepository.save(user);
-        return zeryf;
+        return this.userRepository.save(user);
     }
 
     public User handleUpdateUser(User user) {
-        User zeryf = this.userRepository.save(user);
-        return zeryf;
+        return this.userRepository.save(user);
     }
 
     public void deleteAUser(long id) {

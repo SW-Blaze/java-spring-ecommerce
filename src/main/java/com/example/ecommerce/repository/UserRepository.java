@@ -10,7 +10,7 @@ import com.example.ecommerce.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User save(User zeryf);
+    User save(User zeros);
 
     List<User> findByEmail(String email);
 

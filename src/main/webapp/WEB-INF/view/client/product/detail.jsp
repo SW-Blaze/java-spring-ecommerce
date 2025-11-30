@@ -6,7 +6,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Zeryf</title>
+            <title>zeros</title>
 
             <!-- Google Web Fonts -->
             <link rel="preconnect" href="https://fonts.googleapis.com">

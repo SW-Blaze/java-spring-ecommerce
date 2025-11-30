@@ -10,14 +10,22 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="" />
                 <meta name="author" content="" />
-                <title>Create Product - SB Admin</title>
+                <title>Update Product - SB Admin</title>
                 <link href="/css/styles.css" rel="stylesheet" />
+
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+                        const orgImage = "${newProduct.image}";
+                        if (orgImage) {
+                            const urlImage = "/images/product/" + orgImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
+
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
@@ -25,7 +33,6 @@
                         });
                     });
                 </script>
-
             </head>
 
             <body class="sb-nav-fixed">
@@ -43,9 +50,9 @@
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a product</h3>
+                                            <h3>Update a product</h3>
                                             <hr />
-                                            <form:form method="post" action="/admin/product/create"
+                                            <form:form method="post" action="/admin/product/update"
                                                 modelAttribute="newProduct" class="row" enctype="multipart/form-data">
                                                 <c:set var="errorName">
                                                     <form:errors path="name" cssClass="invalid-feedback" />
@@ -63,13 +70,17 @@
                                                     <form:errors path="quantity" cssClass="invalid-feedback" />
                                                 </c:set>
 
-                                                <div class="mb-3 col-12 col-md-6">
+                                                <div class="mb-3" style="display: none;">
+                                                    <label class="form-label">Id:</label>
+                                                    <form:input type="text" path="id" class="form-control" />
+                                                </div>
+                                                <div class="mb-3">
                                                     <label class="form-label">Name:</label>
                                                     <form:input type="text" path="name"
                                                         class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
                                                     ${errorName}
                                                 </div>
-                                                <div class="mb-3 col-12 col-md-6">
+                                                <div class="mb-3">
                                                     <label class="form-label">Price:</label>
                                                     <form:input type="number" path="price"
                                                         class="form-control ${not empty errorPrice ? 'is-invalid' : ''}" />
@@ -81,13 +92,13 @@
                                                         class="form-control ${not empty errorDetailDesc ? 'is-invalid' : ''}" />
                                                     ${errorDetailDesc}
                                                 </div>
-                                                <div class="mb-3 col-12 col-md-6">
+                                                <div class="mb-3">
                                                     <label class="form-label">Short Description:</label>
                                                     <form:input type="text" path="shortDesc"
                                                         class="form-control ${not empty errorShortDesc ? 'is-invalid' : ''}" />
                                                     ${errorShortDesc}
                                                 </div>
-                                                <div class="mb-3 col-12 col-md-6">
+                                                <div class="mb-3">
                                                     <label class="form-label">Quantity:</label>
                                                     <form:input type="number" path="quantity"
                                                         class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}" />
@@ -125,9 +136,7 @@
                                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
                                                         id="avatarPreview">
                                                 </div>
-                                                <div class="mb-5 col-12">
-                                                    <button type="submit" class="btn btn-primary">Create</button>
-                                                </div>
+                                                <button type="submit" class="btn btn-warning">Update</button>
                                             </form:form>
                                         </div>
                                     </div>
