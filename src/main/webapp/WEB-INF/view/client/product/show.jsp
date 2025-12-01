@@ -70,25 +70,13 @@
                 <!-- Modal Search End -->
 
 
-                <jsp:include page="../layout/banner.jsp" />
-
-
                 <!-- Fruits Shop Start-->
                 <div class="container-fluid fruite py-5">
                     <div class="container py-5">
-                        <div class="tab-class text-center">
+                        <div class="tab-class text-center py-5">
                             <div class="row g-4">
                                 <div class="col-lg-4 text-start">
-                                    <h1>Sản phẩm nổi bật</h1>
-                                </div>
-                                <div class="col-lg-8 text-end">
-                                    <ul class="nav nav-pills d-inline-flex text-center mb-5">
-                                        <li class="nav-item">
-                                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" href="/product">
-                                                <span class="text-dark" style="width: 130px;">Xem tất cả</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <h1>Tất cả sản phẩm</h1>
                                 </div>
                             </div>
                             <div class="tab-content">
@@ -387,8 +375,6 @@
                 </div>
                 <!-- Fruits Shop End-->
 
-
-                <jsp:include page="../layout/feature.jsp" />
 
                 <jsp:include page="../layout/footer.jsp" />
 

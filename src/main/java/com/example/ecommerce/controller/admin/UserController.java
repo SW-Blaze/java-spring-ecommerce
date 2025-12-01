@@ -83,7 +83,7 @@ public class UserController {
         zeros.setPassword(hashPassword);
         zeros.setRole(this.userService.getRoleByName(zeros.getRole().getName()));
         // save
-        // this.userService.handleSaveUser(zeros);
+        this.userService.handleSaveUser(zeros);
         return "redirect:/admin/user";
     }
 
@@ -117,4 +117,5 @@ public class UserController {
         this.userService.deleteAUser(zeros.getId());
         return "redirect:/admin/user";
     }
+
 }

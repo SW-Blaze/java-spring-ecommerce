@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.domain.Role;
 import com.example.ecommerce.domain.User;
+import com.example.ecommerce.domain.dto.RegisterDTO;
 import com.example.ecommerce.repository.RoleRepository;
 import com.example.ecommerce.repository.UserRepository;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
@@ -50,4 +52,13 @@ public class UserService {
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
     }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
+
 }

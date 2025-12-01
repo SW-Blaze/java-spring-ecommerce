@@ -7,7 +7,9 @@ import com.example.ecommerce.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
     Product save(Product p);
 
     Product findById(long id);
+
 }

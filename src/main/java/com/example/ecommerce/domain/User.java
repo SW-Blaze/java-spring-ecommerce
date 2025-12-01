@@ -125,4 +125,5 @@ public class User {
                 + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar
                 + "]";
     }
+
 }

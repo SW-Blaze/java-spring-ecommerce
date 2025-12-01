@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ecommerce.domain.Product;
-import com.example.ecommerce.domain.User;
 
 @Controller
 public class ProductController {
@@ -121,4 +120,5 @@ public class ProductController {
         this.productService.deleteProduct(pr.getId());
         return "redirect:/admin/product";
     }
+
 }
