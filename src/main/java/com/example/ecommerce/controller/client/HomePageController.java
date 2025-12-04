@@ -16,6 +16,8 @@ import com.example.ecommerce.domain.dto.RegisterDTO;
 import com.example.ecommerce.service.ProductService;
 import com.example.ecommerce.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -32,9 +34,10 @@ public class HomePageController {
     }
 
     @GetMapping("/")
-    public String getHomePage(Model model) {
+    public String getHomePage(Model model, HttpServletRequest request) {
         List<Product> products = this.productService.fetchProducts();
         model.addAttribute("products", products);
+        HttpSession session = request.getSession(false);
         return "client/homepage/show";
     }
 
