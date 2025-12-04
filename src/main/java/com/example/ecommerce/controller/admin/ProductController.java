@@ -35,13 +35,13 @@ public class ProductController {
     public String getProductPage(Model model) {
         List<Product> prs = this.productService.fetchProducts();
         model.addAttribute("products", prs);
-        return "/admin/product/show";
+        return "admin/product/show";
     }
 
     @GetMapping("/admin/product/create")
     public String getCreateProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping(value = "/admin/product/create")
@@ -53,7 +53,7 @@ public class ProductController {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
         }
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
 
         String image = this.uploadService.handleSaveUploadFile(file, "product");
@@ -69,7 +69,7 @@ public class ProductController {
         Product pr = this.productService.fetchProductById(id);
         model.addAttribute("product", pr);
         model.addAttribute("id", id);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/update/{id}")
@@ -85,7 +85,7 @@ public class ProductController {
 
         // Validate
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/update";
+            return "admin/product/update";
         }
 
         Product currentProduct = this.productService.fetchProductById(pr.getId());

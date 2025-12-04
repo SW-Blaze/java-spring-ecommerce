@@ -73,9 +73,9 @@
                 <!-- Fruits Shop Start-->
                 <div class="container-fluid fruite py-5">
                     <div class="container py-5">
-                        <div class="tab-class text-center py-5">
+                        <div class="tab-class text-center">
                             <div class="row g-4">
-                                <div class="col-lg-4 text-start">
+                                <div class="col-lg-4 text-start mb-5 mt-5">
                                     <h1>Tất cả sản phẩm</h1>
                                 </div>
                             </div>
