@@ -64,9 +64,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User zeros,
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User zeryf,
             BindingResult newUserBindingResult,
-            @RequestParam("zerosFile") MultipartFile file) {
+            @RequestParam("zeryfFile") MultipartFile file) {
         List<FieldError> errors = newUserBindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
@@ -78,25 +78,25 @@ public class UserController {
         }
 
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        String hashPassword = this.passwordEncoder.encode(zeros.getPassword());
-        zeros.setAvatar(avatar);
-        zeros.setPassword(hashPassword);
-        zeros.setRole(this.userService.getRoleByName(zeros.getRole().getName()));
+        String hashPassword = this.passwordEncoder.encode(zeryf.getPassword());
+        zeryf.setAvatar(avatar);
+        zeryf.setPassword(hashPassword);
+        zeryf.setRole(this.userService.getRoleByName(zeryf.getRole().getName()));
         // save
-        this.userService.handleSaveUser(zeros);
+        this.userService.handleSaveUser(zeryf);
         return "redirect:/admin/user";
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User zeros,
-            @RequestParam("zerosFile") MultipartFile file) {
-        User currentUser = this.userService.getUserById(zeros.getId());
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User zeryf,
+            @RequestParam("zeryfFile") MultipartFile file) {
+        User currentUser = this.userService.getUserById(zeryf.getId());
         if (currentUser != null) {
-            currentUser.setFullName(zeros.getFullName());
-            currentUser.setRole(zeros.getRole());
-            currentUser.setPhone(zeros.getPhone());
-            currentUser.setAddress(zeros.getAddress());
-            currentUser.setAvatar(zeros.getAvatar());
+            currentUser.setFullName(zeryf.getFullName());
+            currentUser.setRole(zeryf.getRole());
+            currentUser.setPhone(zeryf.getPhone());
+            currentUser.setAddress(zeryf.getAddress());
+            currentUser.setAvatar(zeryf.getAvatar());
 
             this.userService.handleSaveUser(currentUser);
         }
@@ -113,8 +113,8 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/delete")
-    public String postDeleteUser(Model model, @ModelAttribute("newUser") User zeros) {
-        this.userService.deleteAUser(zeros.getId());
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User zeryf) {
+        this.userService.deleteAUser(zeryf.getId());
         return "redirect:/admin/user";
     }
 

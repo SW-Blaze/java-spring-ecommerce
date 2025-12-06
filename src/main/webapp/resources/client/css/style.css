@@ -133,7 +133,7 @@
 .navbar .navbar-nav .nav-link.active,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary);
+    color: #1435c3;
 }
 
 .navbar .dropdown-toggle::after {
@@ -163,6 +163,19 @@
     color: var(--bs-primary);
 }
 
+/* Dropdown mở khi hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    /* fix nhảy menu */
+}
+
+/* Giữ menu mở khi di chuột */
+.dropdown-menu {
+    margin-top: 0;
+}
+
+
 .navbar .nav-item:hover .dropdown-menu {
     transform: rotateX(0deg);
     visibility: visible;
@@ -176,7 +189,33 @@
     background: rgba(255, 255, 255, .8);
 }
 
+.text-low-dark {
+    color: #333333;
+}
+
 /*** Navbar End ***/
+
+/* Menu */
+.mt-9 {
+    margin-top: 9rem !important;
+}
+
+.col-slider-banner {
+    flex: 0 0 auto;
+    width: 66.667%;
+}
+
+.col-hot-promo {
+    flex: 0 0 auto;
+    width: 185.2px;
+}
+
+.gap-hot-promo {
+    gap: 2.55rem !important;
+}
+
+
+/* End Menu */
 
 /*** Hero Header ***/
 .hero-header {
@@ -493,6 +532,16 @@
 
 /*** Single Page End ***/
 
+/* Cart */
+.delete-hover:hover {
+    color: #da4343 !important;
+}
+
+.btn-unfocus:focus {
+    box-shadow: unset;
+}
+
+/* End Cart */
 
 /*** Footer Start ***/
 .footer .footer-item .btn-link {

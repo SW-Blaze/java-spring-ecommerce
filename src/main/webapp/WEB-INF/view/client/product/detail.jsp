@@ -17,7 +17,7 @@
                     rel="stylesheet">
 
                 <!-- Icon Font Stylesheet -->
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.1.0/css/all.css" />
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
                     rel="stylesheet">
 
@@ -37,26 +37,14 @@
                 <jsp:include page="../layout/header.jsp" />
 
 
-                <!-- Single Page Header start -->
-                <div class="container-fluid page-header py-5">
-                    <h1 class="text-center text-white display-6">Shop Detail</h1>
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active text-white">Shop Detail</li>
-                    </ol>
-                </div>
-                <!-- Single Page Header End -->
-
-
                 <!-- Single Product Start -->
                 <div class="container-fluid py-5 mt-5">
                     <div class="container py-5">
-                        <div class="row g-4 mb-5">
+                        <div class="row g-4 mb-3">
                             <div>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Chi Tiết Sản Phẩm</li>
                                     </ol>
                                 </nav>

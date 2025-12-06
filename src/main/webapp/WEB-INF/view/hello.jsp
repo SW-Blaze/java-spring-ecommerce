@@ -21,7 +21,7 @@
         <body>
             Hello from jsp
 
-            <h1>${zeros}</h1>
+            <h1>${zeryf}</h1>
             <h2>${fyrez}</h2>
             <button class="btn btn-warning">Submit</button>
         </body>

@@ -234,12 +234,12 @@ sup {
 }
 
 a {
-    color: #81c408;
+    color: rgb(130, 134, 158);
     text-decoration: none
 }
 
 a:hover {
-    color: #679d06
+    color: #1435c3;
 }
 
 a:not([href]):not([class]),
@@ -693,7 +693,7 @@ progress {
     .container-md,
     .container-sm,
     .container {
-        max-width: 1320px
+        max-width: 1200px
     }
 }
 
@@ -3139,8 +3139,8 @@ fieldset:disabled .btn {
 
 .btn-primary {
     color: #000;
-    background-color: #81c408;
-    border-color: #81c408
+    background-color: #1435c3;
+    border-color: #1435c3;
 }
 
 .btn-primary:hover {
@@ -4175,7 +4175,7 @@ fieldset:disabled .btn {
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: .25rem 1rem;
+    padding: .75rem 1rem;
     clear: both;
     font-weight: 400;
     color: #212529;
@@ -4397,7 +4397,7 @@ fieldset:disabled .btn {
 
 .nav-link:hover,
 .nav-link:focus {
-    color: #679d06
+    color: #81c408;
 }
 
 .nav-link.disabled {
@@ -7367,7 +7367,7 @@ fieldset:disabled .btn {
 }
 
 .border-primary {
-    border-color: #81c408 !important
+    border-color: #1435c3 !important
 }
 
 .border-secondary {
@@ -8344,7 +8344,7 @@ fieldset:disabled .btn {
 }
 
 .text-primary {
-    color: #81c408 !important
+    color: #1435c3 !important
 }
 
 .text-secondary {

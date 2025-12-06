@@ -17,7 +17,7 @@
                     rel="stylesheet">
 
                 <!-- Icon Font Stylesheet -->
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.1.0/css/all.css" />
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
                     rel="stylesheet">
 
@@ -46,8 +46,96 @@
                 <jsp:include page="../layout/header.jsp" />
 
 
-                <jsp:include page="../layout/banner.jsp" />
+                <!-- Menu -->
+                <div class="container-fluid mt-9 mb-4" style="height: 424px;">
+                    <div class="container">
+                        <div class="row" style="height: 432px">
+                            <!-- CỘT TRÁI: MENU-->
+                            <div class="col-2 d-none d-md-block ps-0">
+                                <div class="border rounded pb-3 bg-white shadow">
+                                    <ul class="list-unstyled">
+                                        <a href="#" class="py-2 d-flex align-items-center">
+                                            <img src="/client/img/menu_icon/laptop.png" class="d-block w-25 pe-2"
+                                                alt="">
+                                            Laptop
+                                        </a>
+                                        <a href="#" class="py-2 d-flex align-items-center">
+                                            <img src="/client/img/menu_icon/pc.png" class="d-block w-25 pe-2" alt="">
+                                            PC - Máy tính bàn
+                                        </a>
+                                        <a href="#" class="py-2 d-flex align-items-center">
+                                            <img src="/client/img/menu_icon/accessory_pc.png" class="d-block w-25 pe-2"
+                                                alt="">
+                                            Linh kiện máy tính
+                                        </a>
+                                        <a href="#" class="py-2 d-flex align-items-center">
+                                            <img src="/client/img/menu_icon/gear_pc.png" class="d-block w-25 pe-2"
+                                                alt="">
+                                            Phụ kiện máy tính
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
 
+                            <!-- CỘT GIỮA: SLIDER + BANNER -->
+                            <div class="col-slider-banner p-0">
+                                <!-- Slider -->
+                                <div id="main-slider" class="carousel slide mb-3" data-bs-ride="carousel"
+                                    style="width: 800px; height: 280px;">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="/client/img/slider_main/build_pc.png"
+                                                class="d-block w-100 rounded">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="/client/img/slider_main/laptop_gaming.png"
+                                                class="d-block w-100 rounded">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="/client/img/slider_main/pc_zeryf.png"
+                                                class="d-block w-100 rounded">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="/client/img/slider_main/super_deal.png"
+                                                class="d-block w-100 rounded">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#main-slider"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#main-slider"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+                                <!-- Banner hàng ngang -->
+                                <div class="d-flex g-2">
+                                    <div class="col-3">
+                                        <img src="/client/img/slider_main/pc_2tr.png" class="img-fluid rounded">
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="/client/img/slider_main/laptop_10tr.png" class="img-fluid rounded">
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="/client/img/slider_main/iphone_1tr.png" class="img-fluid rounded">
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="/client/img/slider_main/giadung_50.png" class="img-fluid rounded">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CỘT PHẢI: 2 BANNER -->
+                            <div class="col-hot-promo d-none d-lg-block pe-0">
+                                <div class="d-flex flex-column gap-hot-promo">
+                                    <img src="/client/img/slider_main/hot_promo.gif" class="rounded">
+                                    <img src="/client/img/slider_main/hot_promo.gif" class="rounded">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Menu -->
 
                 <!-- Fruits Shop Start-->
                 <div class="container-fluid fruite py-5">
@@ -55,7 +143,7 @@
                         <div class="tab-class text-center">
                             <div class="row g-4">
                                 <div class="col-lg-4 text-start">
-                                    <h1>Sản phẩm nổi bật</h1>
+                                    <h1>Sản Phẩm Nổi Bật</h1>
                                 </div>
                                 <div class="col-lg-8 text-end">
                                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
@@ -89,17 +177,23 @@
                                                                     <a href="/product/${product.id}">${product.name}</a>
                                                                 </h4>
                                                                 <p style="font-size: 13px;">${product.shortDesc}</p>
-                                                                <div class="d-flex flex-lg-wrap">
+                                                                <div class="d-flex flex-lg-wrap justify-content-center">
                                                                     <p class="text-dark fw-bold mb-3"
                                                                         style="font-size: 15px; text-align: center; width: 100%;">
                                                                         <fmt:formatNumber type="number"
                                                                             value="${product.price}" /> đ
                                                                     </p>
-                                                                    <a href="#"
-                                                                        class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                        Add to cart
-                                                                    </a>
+                                                                    <form method="post"
+                                                                        action="/add-product-to-cart/${product.id}"
+                                                                        class="w-100">
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
+                                                                            value="${_csrf.token}" />
+                                                                        <button
+                                                                            class="mx-auto btn border border-primary px-3 text-primary w-100">
+                                                                            Thêm vào giỏ
+                                                                        </button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>

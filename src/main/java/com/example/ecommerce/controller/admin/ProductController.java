@@ -46,7 +46,7 @@ public class ProductController {
 
     @PostMapping(value = "/admin/product/create")
     public String CreateProductPage(Model model, @ModelAttribute("newProduct") @Valid Product pr,
-            BindingResult newProductBindingResult, @RequestParam("zerosFile") MultipartFile file) {
+            BindingResult newProductBindingResult, @RequestParam("zeryfFile") MultipartFile file) {
 
         List<FieldError> errors = newProductBindingResult.getFieldErrors();
         for (FieldError error : errors) {
@@ -66,7 +66,7 @@ public class ProductController {
 
     @GetMapping("/admin/product/{id}")
     public String getDetailProductPage(Model model, @PathVariable long id) {
-        Product pr = this.productService.fetchProductById(id);
+        Product pr = this.productService.fetchProductById(id).get();
         model.addAttribute("product", pr);
         model.addAttribute("id", id);
         return "admin/product/detail";
@@ -74,21 +74,21 @@ public class ProductController {
 
     @GetMapping("/admin/product/update/{id}")
     public String getUpdateProductPage(Model model, @PathVariable long id) {
-        Product currentProduct = this.productService.fetchProductById(id);
+        Product currentProduct = this.productService.fetchProductById(id).get();
         model.addAttribute("newProduct", currentProduct);
         return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
     public String postUpdateUser(@ModelAttribute("newProduct") @Valid Product pr, BindingResult newProductBindingResult,
-            @RequestParam("zerosFile") MultipartFile file) {
+            @RequestParam("zeryfFile") MultipartFile file) {
 
         // Validate
         if (newProductBindingResult.hasErrors()) {
             return "admin/product/update";
         }
 
-        Product currentProduct = this.productService.fetchProductById(pr.getId());
+        Product currentProduct = this.productService.fetchProductById(pr.getId()).get();
         if (currentProduct != null) {
             // update new image
             if (!file.isEmpty()) {
