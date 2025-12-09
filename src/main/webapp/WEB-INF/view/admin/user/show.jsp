@@ -9,7 +9,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <meta name="description" content="" />
             <meta name="author" content="" />
-            <title>Dashboard - SB Admin</title>
+            <title>User - SB Admin</title>
             <link href="/css/styles.css" rel="stylesheet" />
             <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         </head>
@@ -30,14 +30,14 @@
                                 <div class="row">
                                     <div class="col-12 mx-auto">
                                         <div class="d-flex justify-content-between">
-                                            <h3>Table users</h3>
+                                            <h3>Table Users</h3>
                                             <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
                                         </div>
                                         <hr />
-                                        <table class="table table-bodered table-hover">
-                                            <thead>
+                                        <table class="table table-bordered border-primary table-hover">
+                                            <thead class="table-dark">
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th>#</th>
                                                     <th>Email</th>
                                                     <th>Full Name</th>
                                                     <th>Role</th>
@@ -45,7 +45,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="user" items="${users1}">
+                                                <c:forEach var="user" items="${user}">
                                                     <tr>
                                                         <th>${user.id}</th>
                                                         <td>${user.email}</td>
@@ -63,6 +63,31 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item">
+                                                    <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                                        href="/admin/user?page=${currentPage - 1}"
+                                                        aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                                                    <li class="page-item">
+                                                        <a class="${(loop.index) eq currentPage ? 'active page-link' : 'page-link'}"
+                                                            href="/admin/user?page=${loop.index}">
+                                                            ${loop.index}
+                                                        </a>
+                                                    </li>
+                                                </c:forEach>
+                                                <li class="page-item">
+                                                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                                        href="/admin/user?page=${currentPage + 1}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>

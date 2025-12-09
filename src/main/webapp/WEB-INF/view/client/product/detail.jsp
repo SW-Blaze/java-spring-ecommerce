@@ -2,6 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+            <!DOCTYPE html>
             <html lang="en">
 
             <head>
@@ -34,11 +35,18 @@
             </head>
 
             <body>
+
+                <!-- Spinner Start -->
+                <div id="spinner"
+                    class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+                    <div class="spinner-grow text-primary" role="status"></div>
+                </div>
+                <!-- Spinner End -->
+
                 <jsp:include page="../layout/header.jsp" />
 
-
                 <!-- Single Product Start -->
-                <div class="container-fluid py-5 mt-5">
+                <div class="container-fluid py-5 mt-9">
                     <div class="container py-5">
                         <div class="row g-4 mb-3">
                             <div>
@@ -80,16 +88,25 @@
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm text-center border-0"
-                                                value="1">
+                                                value="1" data-cart-detail-index="0">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <a href="#"
-                                            class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        <form action="/add-product-from-view-detail" method="post"
+                                            modelAttribute="product">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                            <input type="text" class="form-control d-none" value="${product.id}"
+                                                name="id" />
+                                            <input type="text" class="form-control d-none" id="cartDetails0.quantity"
+                                                name="quantity" />
+                                            <button
+                                                class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                     <div class="col-lg-12">
                                         <nav>
@@ -454,16 +471,14 @@
                 </div>
                 <!-- Single Product End -->
 
-
                 <jsp:include page="../layout/feature.jsp" />
 
                 <jsp:include page="../layout/footer.jsp" />
 
-
                 <!-- Back to Top -->
-                <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-                        class="fa fa-arrow-up"></i></a>
-
+                <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top">
+                    <i class="fa fa-arrow-up"></i>
+                </a>
 
                 <!-- JavaScript Libraries -->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

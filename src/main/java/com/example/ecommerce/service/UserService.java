@@ -2,11 +2,15 @@ package com.example.ecommerce.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.domain.Role;
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.domain.dto.RegisterDTO;
+import com.example.ecommerce.repository.OrderRepository;
+import com.example.ecommerce.repository.ProductRepository;
 import com.example.ecommerce.repository.RoleRepository;
 import com.example.ecommerce.repository.UserRepository;
 
@@ -15,18 +19,23 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository,
+            ProductRepository productRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public String handleHello() {
         return "Hello from service";
     }
 
-    public List<User> getAllUser() {
-        return this.userRepository.findAll();
+    public Page<User> getAllUser(Pageable page) {
+        return this.userRepository.findAll(page);
     }
 
     public List<User> getAllUserByEmail(String email) {
@@ -67,6 +76,18 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findOneByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+    }
+
+    public long countOrders() {
+        return this.orderRepository.count();
     }
 
 }

@@ -1,7 +1,11 @@
 package com.example.ecommerce.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.ecommerce.domain.Order;
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.service.UploadService;
 import com.example.ecommerce.service.UserService;
@@ -35,10 +40,28 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = this.userService.getAllUser();
-        model.addAttribute("users1", users);
+    @GetMapping("/admin/user")
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                // Convert from string to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // Page = 1
+            }
+        } catch (Exception e) {
+            // Page = 1
+            // TODO: Handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<User> users = this.userService.getAllUser(pageable);
+        List<User> listUsers = users.getContent();
+        model.addAttribute("user", listUsers);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", users.getTotalPages());
+
         return "admin/user/show";
     }
 
@@ -63,7 +86,7 @@ public class UserController {
         return "admin/user/update";
     }
 
-    @PostMapping(value = "/admin/user/create")
+    @PostMapping("/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User zeryf,
             BindingResult newUserBindingResult,
             @RequestParam("zeryfFile") MultipartFile file) {
@@ -113,7 +136,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/delete")
-    public String postDeleteUser(Model model, @ModelAttribute("newUser") User zeryf) {
+    public String postDeleteUser(@ModelAttribute("newUser") User zeryf) {
         this.userService.deleteAUser(zeryf.getId());
         return "redirect:/admin/user";
     }

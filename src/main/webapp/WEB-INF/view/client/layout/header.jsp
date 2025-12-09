@@ -40,7 +40,7 @@
                                             Giỏ hàng của bạn
                                         </span>
                                         <span class="d-flex flex-column fa-1x px-2">
-                                            (3) sản phẩm
+                                            (${sessionScope.sum}) sản phẩm
                                         </span>
                                     </div>
                                 </a>
@@ -75,7 +75,7 @@
                                         </li>
 
                                         <li>
-                                            <a class="dropdown-item text-low-dark" href="#">
+                                            <a class="dropdown-item text-low-dark" href="/order-history">
                                                 Quản lý đơn hàng
                                             </a>
                                         </li>
