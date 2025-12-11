@@ -52,7 +52,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Thông tin thanh toán</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm</li>
                                 </ol>
                             </nav>
                         </div>

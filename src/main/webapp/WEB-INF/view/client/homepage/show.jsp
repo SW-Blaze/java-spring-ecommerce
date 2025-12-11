@@ -159,6 +159,7 @@
                                 <div id="tab-1" class="tab-pane fade show p-0 active">
                                     <div class="row g-4">
                                         <div class="col-lg-12">
+                                            <div id="product-list-start" style="scroll-margin-top: 120px;"></div>
                                             <div class="row g-4">
                                                 <c:forEach var="product" items="${products}">
                                                     <div class="col-md-6 col-lg-4 col-xl-3">
@@ -204,21 +205,23 @@
                                                     <ul class="pagination d-flex justify-content-center">
                                                         <li class="page-item">
                                                             <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                                href="/?page=${currentPage - 1}" aria-label="Previous">
+                                                                href="/?page=${currentPage - 1}#product-list-start"
+                                                                aria-label="Previous">
                                                                 <span aria-hidden="true">&laquo;</span>
                                                             </a>
                                                         </li>
                                                         <c:forEach begin="1" end="${totalPages}" varStatus="loop">
                                                             <li class="page-item">
                                                                 <a class="${(loop.index) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                                    href="/?page=${loop.index}">
+                                                                    href="/?page=${loop.index}#product-list-start">
                                                                     ${loop.index}
                                                                 </a>
                                                             </li>
                                                         </c:forEach>
                                                         <li class="page-item">
                                                             <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                                href="/?page=${currentPage + 1}" aria-label="Next">
+                                                                href="/?page=${currentPage + 1}#product-list-start"
+                                                                aria-label="Next">
                                                                 <span aria-hidden="true">&raquo;</span>
                                                             </a>
                                                         </li>
@@ -253,21 +256,6 @@
 
                 <!-- Template Javascript -->
                 <script src="/client/js/main.js"></script>
-
-                <script>
-                    // Lưu vị trí scroll trước khi rời trang
-                    window.addEventListener("beforeunload", function () {
-                        localStorage.setItem("scrollPos", window.scrollY);
-                    });
-
-                    // Đưa người dùng về vị trí cũ sau khi load trang
-                    window.addEventListener("load", function () {
-                        const pos = localStorage.getItem("scrollPos");
-                        if (pos) {
-                            window.scrollTo(0, parseInt(pos));
-                        }
-                    });
-                </script>
 
             </body>
 

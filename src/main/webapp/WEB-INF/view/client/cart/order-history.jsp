@@ -59,7 +59,7 @@
                                     </ol>
                                 </nav>
                             </div>
-                            <c:if test="${ empty cartDetails}">
+                            <c:if test="${ empty orders}">
                                 <div class="d-flex flex-column justify-content-center align-items-center"
                                     style="height: 500px;">
                                     <div class="p-3">
@@ -70,9 +70,9 @@
                                     </a>
                                 </div>
                             </c:if>
-                            <c:if test="${not empty cartDetails}">
+                            <c:if test="${not empty orders}">
                                 <div class="row g-4">
-                                    <div class="table-responsive col-lg-8">
+                                    <div class="table-responsive">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -92,7 +92,7 @@
                                                                 value="${order.totalPrice}" />
                                                             đ
                                                         </td>
-                                                        <td colspan="2"></td>
+                                                        <td colspan="1"></td>
                                                         <td colspan="1">${order.status}</td>
                                                     </tr>
                                                     <c:forEach var="orderDetail" items="${order.orderDetails}">
@@ -117,10 +117,15 @@
                                                                 </p>
                                                             </td>
                                                             <td>
+                                                                <p class="mb-0 mt-4">
+                                                                    ${orderDetail.quantity}
+                                                                </p>
+                                                            </td>
+                                                            <td>
                                                                 <p class="mb-0 mt-4"
                                                                     data-cart-detail-id="${cartDetail.id}">
                                                                     <fmt:formatNumber type="number"
-                                                                        value="${cartDetail.price * cartDetail.quantity}" />
+                                                                        value="${orderDetail.price * orderDetail.quantity}" />
                                                                     đ
                                                                 </p>
                                                             </td>
