@@ -45,7 +45,7 @@
 
 body {
     margin: 0;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Roboto", Arial, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -239,7 +239,7 @@ a {
 }
 
 a:hover {
-    color: #1435c3;
+    color: #1435c3 !important;
 }
 
 a:not([href]):not([class]),
@@ -8379,7 +8379,7 @@ fieldset:disabled .btn {
 }
 
 .text-dark {
-    color: #45595b !important
+    color: #000 !important
 }
 
 .text-white {

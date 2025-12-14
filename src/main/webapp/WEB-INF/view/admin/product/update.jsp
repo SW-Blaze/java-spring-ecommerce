@@ -109,18 +109,17 @@
                                                     ${errorQuantity}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Factory:</label>
-                                                    <form:select class="form-select" path="factory">
-                                                        <form:option value="APPLE">Apple</form:option>
-                                                        <form:option value="ACER">Acer</form:option>
-                                                        <form:option value="ASUS">Asus</form:option>
-                                                        <form:option value="DELL">Dell</form:option>
-                                                        <form:option value="HP">HP</form:option>
-                                                        <form:option value="LENOVO">Lenovo</form:option>
-                                                        <form:option value="MSI">MSI</form:option>
-                                                        <form:option value="GIGABYTE">Gigabyte</form:option>
-                                                        <form:option value="INTEL">Intel</form:option>
-                                                        <form:option value="AMD">AMD</form:option>
+                                                    <label class="form-label">Brand:</label>
+                                                    <form:select class="form-select" path="brand.id">
+                                                        <form:options items="${brands}" itemValue="id"
+                                                            itemLabel="name" />
+                                                    </form:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Category:</label>
+                                                    <form:select class="form-select" path="category.id">
+                                                        <form:options items="${categories}" itemValue="id"
+                                                            itemLabel="name" />
                                                     </form:select>
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">

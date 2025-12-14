@@ -11,7 +11,7 @@
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
-                    <title>Giỏ hàng - Laptopshop</title>
+                    <title>Giỏ hàng - Zeryf</title>
 
                     <!-- Google Web Fonts -->
                     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ecommerce.domain.Order;
 import com.example.ecommerce.domain.OrderStatus;
-import com.example.ecommerce.domain.Product;
 import com.example.ecommerce.service.OrderService;
 
 import org.springframework.ui.Model;

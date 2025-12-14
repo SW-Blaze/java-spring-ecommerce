@@ -98,18 +98,17 @@
                                                     ${errorQuantity}
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Factory:</label>
-                                                    <form:select class="form-select" path="factory">
-                                                        <form:option value="APPLE">Apple</form:option>
-                                                        <form:option value="ACER">Acer</form:option>
-                                                        <form:option value="ASUS">Asus</form:option>
-                                                        <form:option value="DELL">Dell</form:option>
-                                                        <form:option value="HP">HP</form:option>
-                                                        <form:option value="LENOVO">Lenovo</form:option>
-                                                        <form:option value="MSI">MSI</form:option>
-                                                        <form:option value="GIGABYTE">Gigabyte</form:option>
-                                                        <form:option value="INTEL">Intel</form:option>
-                                                        <form:option value="AMD">AMD</form:option>
+                                                    <label class="form-label">Brand:</label>
+                                                    <form:select class="form-select" path="brand.id">
+                                                        <form:options items="${brands}" itemValue="id"
+                                                            itemLabel="name" />
+                                                    </form:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Category:</label>
+                                                    <form:select class="form-select" path="category.id">
+                                                        <form:options items="${categories}" itemValue="id"
+                                                            itemLabel="name" />
                                                     </form:select>
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
@@ -125,8 +124,8 @@
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         accept=".png, .jpg, .jpeg" name="zeryfFile" />
                                                 </div>
-                                                <div class="mb-3 col-12">
-                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                <div class="d-flex justify-content-end mb-3 col-12">
+                                                    <img style="max-height: 200px; display: none;" alt="avatar preview"
                                                         id="avatarPreview">
                                                 </div>
                                                 <div class="mb-5 col-12">

@@ -41,11 +41,11 @@
                                                     <h3>Product detail with id = ${id}</h3>
                                                 </div>
                                                 <hr />
-                                                <div class="card" style="width: 60%;">
+                                                <div class="card" style="width: 10%;">
                                                     <img src="/images/product/${product.image}" alt="Card image cap"
                                                         class="card-img-top">
                                                 </div>
-                                                <div class="card" style="width: 60%">
+                                                <div class="card" style="width: 50%">
                                                     <div class="card-header">
                                                         Product Information
                                                     </div>
@@ -62,7 +62,7 @@
                                                             ${product.shortDesc}
                                                         </li>
                                                         <li class="list-group-item">Quantity: ${product.quantity}</li>
-                                                        <li class="list-group-item">Factory: ${product.factory}</li>
+                                                        <li class="list-group-item">brand: ${product.brand.name}</li>
                                                         <li class="list-group-item">Target: ${product.target}</li>
                                                     </ul>
                                                 </div>

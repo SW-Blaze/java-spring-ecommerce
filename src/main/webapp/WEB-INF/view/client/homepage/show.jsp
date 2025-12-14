@@ -8,7 +8,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Trang chủ - Laptopshop</title>
+                <title>Trang chủ - Zeryf</title>
 
                 <!-- Google Web Fonts -->
                 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,29 +52,28 @@
                         <div class="row" style="height: 432px">
                             <!-- CỘT TRÁI: MENU-->
                             <div class="col-2 d-none d-md-block ps-0">
-                                <div class="border rounded pb-3 bg-white shadow">
-                                    <ul class="list-unstyled">
-                                        <a href="#" class="py-2 d-flex align-items-center">
-                                            <img src="/client/img/menu_icon/laptop.png" class="d-block w-25 pe-2"
-                                                alt="">
-                                            Laptop
-                                        </a>
-                                        <a href="#" class="py-2 d-flex align-items-center">
-                                            <img src="/client/img/menu_icon/pc.png" class="d-block w-25 pe-2" alt="">
-                                            PC - Máy tính bàn
-                                        </a>
-                                        <a href="#" class="py-2 d-flex align-items-center">
-                                            <img src="/client/img/menu_icon/accessory_pc.png" class="d-block w-25 pe-2"
-                                                alt="">
-                                            Linh kiện máy tính
-                                        </a>
-                                        <a href="#" class="py-2 d-flex align-items-center">
-                                            <img src="/client/img/menu_icon/gear_pc.png" class="d-block w-25 pe-2"
-                                                alt="">
-                                            Phụ kiện máy tính
-                                        </a>
-                                    </ul>
-                                </div>
+                                <ul class="list-unstyled">
+                                    <a href="/build-pc" class="d-flex align-items-center">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        <div class="ps-2 text-dark">Xây dựng cấu hình</div>
+                                    </a>
+                                    <a href="#" class="d-flex align-items-center">
+                                        <i class="fa-solid fa-laptop"></i>
+                                        <div class="ps-2 text-dark">Laptop</div>
+                                    </a>
+                                    <a href="#" class="d-flex align-items-center">
+                                        <i class="fa-solid fa-computer"></i>
+                                        <div class="ps-2 text-dark">PC - Máy tính bàn</div>
+                                    </a>
+                                    <a href="#" class="d-flex align-items-center">
+                                        <i class="fa-solid fa-microchip"></i>
+                                        <div class="ps-2 text-dark">Linh kiện máy tính</div>
+                                    </a>
+                                    <a href="#" class="d-flex align-items-center">
+                                        <i class="fa-regular fa-keyboard"></i>
+                                        <div class="ps-2 text-dark">Phụ kiện máy tính</div>
+                                    </a>
+                                </ul>
                             </div>
 
                             <!-- CỘT GIỮA: SLIDER + BANNER -->

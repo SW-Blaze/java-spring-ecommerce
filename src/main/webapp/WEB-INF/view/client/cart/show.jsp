@@ -11,7 +11,7 @@
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
-                    <title>Giỏ hàng - Laptopshop</title>
+                    <title>Giỏ hàng - Zeryf</title>
 
                     <!-- Google Web Fonts -->
                     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,10 +161,10 @@
                                         </table>
                                     </div>
 
-                                    <div class="mt-5 row g-4 justify-content-end col-lg-4">
+                                    <div class="col-lg-4">
                                         <div class="col-12">
                                             <div class="bg-light rounded">
-                                                <div class="p-4">
+                                                <div class="px-4">
                                                     <h1 class="display-6 mb-4">Thanh <span class="fw-normal">toán</span>
                                                     </h1>
                                                     <div class="d-flex justify-content-between mb-4">
@@ -188,7 +188,7 @@
                                                     </p>
                                                 </div>
                                                 <form:form action="/confirm-checkout" method="post"
-                                                    modelAttribute="cart">
+                                                    modelAttribute="cart" class="text-center">
                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                         value="${_csrf.token}" />
                                                     <div style="display: none;">
@@ -211,7 +211,7 @@
                                                         </c:forEach>
                                                     </div>
                                                     <button
-                                                        class="btn btn-primary px-4 py-3 text-light text-uppercase mb-4 ms-4 btn-unfocus">
+                                                        class="btn btn-primary px-4 py-3 text-light text-uppercase m-auto btn-unfocus">
                                                         Tiến Hành Thanh Toán
                                                     </button>
                                                 </form:form>

@@ -1,10 +1,16 @@
 package com.example.ecommerce.domain;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -43,8 +49,19 @@ public class Product {
     private long quantity;
 
     private long sold;
-    private String factory;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id") // Khóa ngoại trỏ sang bảng brands
+    private Brand brand;
+
     private String target;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id") // Khóa ngoại trỏ sang bảng categories
+    private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductAttribute> attributes;
 
     public long getId() {
         return id;
@@ -110,12 +127,12 @@ public class Product {
         this.sold = sold;
     }
 
-    public String getFactory() {
-        return factory;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setFactory(String factory) {
-        this.factory = factory;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public String getTarget() {
@@ -126,11 +143,28 @@ public class Product {
         this.target = target;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<ProductAttribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<ProductAttribute> attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
     public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", detailDesc="
-                + detailDesc + ", shortDesc=" + shortDesc + ", quantity=" + quantity + ", sold=" + sold + ", factory="
-                + factory + ", target=" + target + "]";
+        return "Product [id=" + id + ", name=" + name + ", price=" + price
+                + ", brand=" + (brand != null ? brand.getName() : "null")
+                + ", category=" + (category != null ? category.getName() : "null")
+                + "]";
     }
 
 }

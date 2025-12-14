@@ -465,6 +465,12 @@
 
 /*** Facts End ***/
 
+/* Build PC Start */
+.box-shadow-build-pc:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0.1rem 0.1rem 0.5rem 0.1rem;
+}
+
+/* Build PC End */
 
 /*** testimonial Start ***/
 .testimonial .owl-nav .owl-prev {

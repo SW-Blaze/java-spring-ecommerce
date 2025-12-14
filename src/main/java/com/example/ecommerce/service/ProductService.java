@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+
 import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.domain.Cart;
@@ -14,13 +14,13 @@ import com.example.ecommerce.domain.Order;
 import com.example.ecommerce.domain.OrderDetail;
 import com.example.ecommerce.domain.OrderStatus;
 import com.example.ecommerce.domain.Product;
-import com.example.ecommerce.domain.Product_;
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.repository.CartDetailRepository;
 import com.example.ecommerce.repository.CartRepository;
 import com.example.ecommerce.repository.OrderDetailRepository;
 import com.example.ecommerce.repository.OrderRepository;
 import com.example.ecommerce.repository.ProductRepository;
+import com.example.ecommerce.service.specification.ProductSpecs;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -49,17 +49,120 @@ public class ProductService {
         return this.productRepository.save(pr);
     }
 
-    private Specification<Product> nameLike(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
-    }
-
     public Page<Product> fetchAllProducts(Pageable page) {
         return this.productRepository.findAll(page);
     }
 
     public Page<Product> fetchAllProductsWithSpec(String name, Pageable page) {
-        return this.productRepository.findAll(this.nameLike(name), page);
+        return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
     }
+
+    // Case 1: Filter products with min price
+    // public Page<Product> fetchAllProductsWithSpec(double min, Pageable page) {
+    // return this.productRepository.findAll(ProductSpecs.minPrice(min), page);
+    // }
+
+    // Case 2: Filter products with max price
+    // public Page<Product> fetchAllProductsWithSpec(double max, Pageable page) {
+    // return this.productRepository.findAll(ProductSpecs.maxPrice(max), page);
+    // }
+
+    // Case 3: Filter products with brand
+    // public Page<Product> fetchAllProductsWithSpec(String brand, Pageable page)
+    // {
+    // return this.productRepository.findAll(ProductSpecs.matchbrand(brand),
+    // page);
+    // }
+
+    // Case 4: Filter products with brand
+    // public Page<Product> fetchAllProductsWithSpec(List<String> brand, Pageable
+    // page) {
+    // return this.productRepository.findAll(ProductSpecs.matchListbrand(brand),
+    // page);
+    // }
+
+    // Case 5: Filter products with rice range
+    // public Page<Product> fetchAllProductsWithSpec(String price, Pageable page) {
+    // if (price.equals("duoi-10-trieu")) {
+    // double min = 0;
+    // double max = 10000000;
+    // return this.productRepository.findAll(ProductSpecs.matchPriceRange(min, max),
+    // page);
+    // } else if (price.equals("10-15-trieu")) {
+    // double min = 10000000;
+    // double max = 15000000;
+    // return this.productRepository.findAll(ProductSpecs.matchPriceRange(min, max),
+    // page);
+    // } else if (price.equals("15-20-trieu")) {
+    // double min = 15000000;
+    // double max = 20000000;
+    // return this.productRepository.findAll(ProductSpecs.matchPriceRange(min, max),
+    // page);
+    // } else if (price.equals("20-25-trieu")) {
+    // double min = 20000000;
+    // double max = 25000000;
+    // return this.productRepository.findAll(ProductSpecs.matchPriceRange(min, max),
+    // page);
+    // } else if (price.equals("25-30-trieu")) {
+    // double min = 25000000;
+    // double max = 30000000;
+    // return this.productRepository.findAll(ProductSpecs.matchPriceRange(min, max),
+    // page);
+    // } else
+    // return this.productRepository.findAll(page);
+    // }
+
+    // Case 6: Filter products with price range
+    // public Page<Product> fetchAllProductsWithSpec(List<String> price, Pageable
+    // page) {
+    // Specification<Product> combinedSpec = (root, query, criteriaBuilder) ->
+    // criteriaBuilder.disjunction();
+    // int count = 0;
+    // for (String p : price) {
+    // double min = 0;
+    // double max = 0;
+
+    // switch (p) {
+    // case "duoi-10-trieu":
+    // min = 0;
+    // max = 10000000;
+    // count++;
+    // break;
+    // case "10-15-trieu":
+    // min = 10000000;
+    // max = 15000000;
+    // count++;
+    // break;
+    // case "15-20-trieu":
+    // min = 15000000;
+    // max = 20000000;
+    // count++;
+    // break;
+    // case "20-25-trieu":
+    // min = 20000000;
+    // max = 25000000;
+    // count++;
+    // break;
+    // case "25-30-trieu":
+    // min = 25000000;
+    // max = 30000000;
+    // count++;
+    // break;
+    // }
+
+    // if (min != 0 || max != 0) {
+    // Specification<Product> priceSpec = ProductSpecs.matchMultiplePriceRange(min,
+    // max);
+    // combinedSpec = combinedSpec.or(priceSpec);
+    // }
+    // }
+
+    // if (count == 0) {
+    // return this.productRepository.findAll(page);
+    // }
+
+    // return this.productRepository.findAll(combinedSpec, page);
+    // }
 
     public Optional<Product> fetchProductById(long id) {
         return this.productRepository.findById(id);

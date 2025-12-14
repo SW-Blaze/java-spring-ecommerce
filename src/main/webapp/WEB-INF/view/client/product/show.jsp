@@ -8,7 +8,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Trang chủ - Laptopshop</title>
+                <title>Trang chủ - Zeryf</title>
 
                 <!-- Google Web Fonts -->
                 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
                                 </ol>
                             </nav>
                         </div>
-                        <h1 class="mb-4">Fresh fruits shop</h1>
+                        <h1 class="mb-4">Tất cả sản phẩm</h1>
                         <div class="row g-4">
                             <div class="col-12 col-md-2">
                                 <div class="row g-4">
@@ -64,30 +64,28 @@
                                         <div class="mb-2"><b>Thương hiệu</b></div>
 
                                         <div class="form-check form-check-inline">
-                                            <input type="checkbox" class="form-check-input" id="factory-1"
-                                                value="APPLE">
-                                            <label for="factory-1" class="form-check-label">Apple</label>
+                                            <input type="checkbox" class="form-check-input" id="brand-1" value="APPLE">
+                                            <label for="brand-1" class="form-check-label">Apple</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="checkbox" class="form-check-input" id="factory-2" value="ASUS">
-                                            <label for="factory-2" class="form-check-label">Asus</label>
+                                            <input type="checkbox" class="form-check-input" id="brand-2" value="ASUS">
+                                            <label for="brand-2" class="form-check-label">Asus</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="checkbox" class="form-check-input" id="factory-3" value="ACER">
-                                            <label for="factory-3" class="form-check-label">Acer</label>
+                                            <input type="checkbox" class="form-check-input" id="brand-3" value="ACER">
+                                            <label for="brand-3" class="form-check-label">Acer</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="checkbox" class="form-check-input" id="factory-4" value="DELL">
-                                            <label for="factory-4" class="form-check-label">Dell</label>
+                                            <input type="checkbox" class="form-check-input" id="brand-4" value="DELL">
+                                            <label for="brand-4" class="form-check-label">Dell</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="checkbox" class="form-check-input" id="factory-5"
-                                                value="LENOVO">
-                                            <label for="factory-5" class="form-check-label">Lenovo</label>
+                                            <input type="checkbox" class="form-check-input" id="brand-5" value="LENOVO">
+                                            <label for="brand-5" class="form-check-label">Lenovo</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="checkbox" class="form-check-input" id="factory-6" value="LG">
-                                            <label for="factory-6" class="form-check-label">LG</label>
+                                            <input type="checkbox" class="form-check-input" id="brand-6" value="LG">
+                                            <label for="brand-6" class="form-check-label">LG</label>
                                         </div>
 
                                     </div>

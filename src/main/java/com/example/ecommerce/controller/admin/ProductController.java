@@ -1,5 +1,7 @@
 package com.example.ecommerce.controller.admin;
 
+import com.example.ecommerce.service.BrandService;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.ProductService;
 import com.example.ecommerce.service.UploadService;
 
@@ -22,17 +24,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.ecommerce.domain.Brand;
+import com.example.ecommerce.domain.Category;
 import com.example.ecommerce.domain.Product;
+import com.example.ecommerce.domain.ProductAttribute;
 
 @Controller
 public class ProductController {
 
     private final ProductService productService;
     private final UploadService uploadService;
+    private final BrandService brandService;
+    private final CategoryService categoryService;
 
-    ProductController(ProductService productService, UploadService uploadService) {
+    ProductController(ProductService productService, UploadService uploadService, BrandService brandService,
+            CategoryService categoryService) {
         this.productService = productService;
         this.uploadService = uploadService;
+        this.brandService = brandService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/admin/product")
@@ -62,6 +72,12 @@ public class ProductController {
 
     @GetMapping("/admin/product/create")
     public String getCreateProductPage(Model model) {
+        List<Brand> listBrands = brandService.getAllBrands();
+        model.addAttribute("brands", listBrands);
+
+        List<Category> listCategories = categoryService.getAllCategories();
+        model.addAttribute("categories", listCategories);
+
         model.addAttribute("newProduct", new Product());
         return "admin/product/create";
     }
@@ -74,12 +90,26 @@ public class ProductController {
         for (FieldError error : errors) {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
         }
+
         if (newProductBindingResult.hasErrors()) {
+            // Load lại dữ liệu cho Dropdown
+            List<Brand> listBrands = brandService.getAllBrands();
+            model.addAttribute("brands", listBrands);
+
+            List<Category> listCategories = categoryService.getAllCategories();
+            model.addAttribute("categories", listCategories);
+
             return "admin/product/create";
         }
 
         String image = this.uploadService.handleSaveUploadFile(file, "product");
         pr.setImage(image);
+
+        if (pr.getAttributes() != null) {
+            for (ProductAttribute attr : pr.getAttributes()) {
+                attr.setProduct(pr); // Nói cho Attribute biết cha nó là ai
+            }
+        }
 
         this.productService.createProduct(pr);
 
@@ -98,15 +128,30 @@ public class ProductController {
     public String getUpdateProductPage(Model model, @PathVariable long id) {
         Product currentProduct = this.productService.fetchProductById(id).get();
         model.addAttribute("newProduct", currentProduct);
+
+        List<Brand> listBrands = brandService.getAllBrands();
+        model.addAttribute("brands", listBrands);
+
+        List<Category> listCategories = categoryService.getAllCategories();
+        model.addAttribute("categories", listCategories);
+
         return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
-    public String postUpdateUser(@ModelAttribute("newProduct") @Valid Product pr, BindingResult newProductBindingResult,
+    public String postUpdateUser(Model model, @ModelAttribute("newProduct") @Valid Product pr,
+            BindingResult newProductBindingResult,
             @RequestParam("zeryfFile") MultipartFile file) {
 
         // Validate
         if (newProductBindingResult.hasErrors()) {
+            // Load lại dữ liệu cho Dropdown
+            List<Brand> listBrands = brandService.getAllBrands();
+            model.addAttribute("brands", listBrands);
+
+            List<Category> listCategories = categoryService.getAllCategories();
+            model.addAttribute("categories", listCategories);
+
             return "admin/product/update";
         }
 
@@ -117,14 +162,19 @@ public class ProductController {
                 String img = this.uploadService.handleSaveUploadFile(file, "product");
                 currentProduct.setImage(img);
             }
+            if (pr.getAttributes() != null) {
+                for (ProductAttribute attr : pr.getAttributes()) {
+                    attr.setProduct(pr); // Nói cho Attribute biết cha nó là ai
+                }
+            }
             currentProduct.setName(pr.getName());
             currentProduct.setPrice(pr.getPrice());
             currentProduct.setDetailDesc(pr.getDetailDesc());
             currentProduct.setShortDesc(pr.getShortDesc());
             currentProduct.setQuantity(pr.getQuantity());
-            currentProduct.setFactory(pr.getFactory());
+            currentProduct.setBrand(pr.getBrand());
             currentProduct.setTarget(pr.getTarget());
-
+            currentProduct.setCategory(pr.getCategory());
             this.productService.createProduct(currentProduct);
         }
         return "redirect:/admin/product";
@@ -132,8 +182,10 @@ public class ProductController {
 
     @GetMapping("/admin/product/delete/{id}")
     public String getDeleteProductPage(Model model, @PathVariable long id) {
+        Product product = new Product();
+        product.setId(id);
         model.addAttribute("id", id);
-        model.addAttribute("newProduct", new Product());
+        model.addAttribute("newProduct", product);
         return "admin/product/delete";
     }
 

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.ecommerce.domain.Order;
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.service.UploadService;
 import com.example.ecommerce.service.UserService;
@@ -128,9 +127,9 @@ public class UserController {
 
     @GetMapping("/admin/user/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable long id) {
-        model.addAttribute("id", id);
         User user = new User();
         user.setId(id);
+        model.addAttribute("id", id);
         model.addAttribute("newUser", user);
         return "admin/user/delete";
     }

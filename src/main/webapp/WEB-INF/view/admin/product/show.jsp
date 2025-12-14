@@ -47,7 +47,7 @@
                                                         <th>#</th>
                                                         <th>Product</th>
                                                         <th>Price</th>
-                                                        <th>Factory</th>
+                                                        <th>brand</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -71,7 +71,7 @@
                                                                     value="${product.price}" />
                                                                 đ
                                                             </td>
-                                                            <td>${product.factory}</td>
+                                                            <td>${product.brand.name}</td>
                                                             <td>
                                                                 <a href="/admin/product/${product.id}"
                                                                     class="btn btn-success">View</a>

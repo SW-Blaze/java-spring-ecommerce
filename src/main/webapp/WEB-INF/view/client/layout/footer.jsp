@@ -65,7 +65,6 @@
                             <a class="btn-link text-dark" href="">Email: zeryf@gmail.com</a>
                             <a class="btn-link text-dark" href="">Phone: +84 123 4567 89</a>
                             <a class="btn-link text-dark" href="">Payment Accepted</a>
-                            <img src="/client/img/payment.png" class="img-fluid" alt="">
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
