@@ -21,12 +21,16 @@ public class ProductSpecs {
         return (root, query, criteriaBuilder) -> criteriaBuilder.le(root.get(Product_.PRICE), price);
     }
 
-    public static Specification<Product> matchbrand(String brand) {
+    public static Specification<Product> matchBrand(String brand) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Product_.BRAND), brand);
     }
 
-    public static Specification<Product> matchListbrand(List<String> brand) {
+    public static Specification<Product> matchListBrand(List<String> brand) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.BRAND)).value(brand);
+    }
+
+    public static Specification<Product> matchListTarget(List<String> target) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.TARGET)).value(target);
     }
 
     public static Specification<Product> matchPriceRange(double min, double max) {

@@ -60,11 +60,11 @@ public class HomePageController {
         }
 
         Pageable pageable = PageRequest.of(page - 1, 8);
-        Page<Product> prs = this.productService.fetchAllProducts(pageable);
+        Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> products = prs.getContent();
-        model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("products", products);
         return "client/homepage/show";
     }
 

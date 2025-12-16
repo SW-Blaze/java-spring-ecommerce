@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.domain.Cart;
@@ -15,6 +15,7 @@ import com.example.ecommerce.domain.OrderDetail;
 import com.example.ecommerce.domain.OrderStatus;
 import com.example.ecommerce.domain.Product;
 import com.example.ecommerce.domain.User;
+import com.example.ecommerce.domain.dto.ProductCriteriaDTO;
 import com.example.ecommerce.repository.CartDetailRepository;
 import com.example.ecommerce.repository.CartRepository;
 import com.example.ecommerce.repository.OrderDetailRepository;
@@ -49,12 +50,26 @@ public class ProductService {
         return this.productRepository.save(pr);
     }
 
-    public Page<Product> fetchAllProducts(Pageable page) {
+    public Page<Product> fetchProducts(Pageable page) {
         return this.productRepository.findAll(page);
     }
 
-    public Page<Product> fetchAllProductsWithSpec(String name, Pageable page) {
-        return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
+    public Page<Product> fetchAllProductsWithSpec(ProductCriteriaDTO productCriteriaDTO, Pageable page) {
+        if (productCriteriaDTO.getTarget() == null && productCriteriaDTO.getTarget() == null
+                && productCriteriaDTO.getPrice() == null) {
+            return this.productRepository.findAll(page);
+        }
+
+        Specification<Product> combinedSpec = Specification.where(null);
+        if (productCriteriaDTO.getTarget() != null && productCriteriaDTO.getTarget().isPresent()) {
+            Specification<Product> currentSpecs = ProductSpecs.matchListTarget(productCriteriaDTO.getTarget().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        if (productCriteriaDTO.getBrand() != null && productCriteriaDTO.getBrand().isPresent()) {
+            Specification<Product> currentSpecs = ProductSpecs.matchListBrand(productCriteriaDTO.getBrand().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        return this.productRepository.findAll(combinedSpec, page);
     }
 
     // Case 1: Filter products with min price

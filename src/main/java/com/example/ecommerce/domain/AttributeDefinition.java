@@ -16,7 +16,7 @@ public class AttributeDefinition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name; // VD: "Socket", "Bus", "Dung lượng"
+    private String name;
 
     @Column(name = "group_name")
     private String groupName;

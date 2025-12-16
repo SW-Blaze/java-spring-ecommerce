@@ -83,12 +83,13 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/cpu.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-7">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-7">Vui lòng chọn linh kiện</div>
+                                                <div id="price-7" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -107,16 +108,17 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/mainboard.82595f5e.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-11">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-11">Vui lòng chọn linh kiện</div>
+                                                <div id="price-11" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-11" onclick="loadFragment(11)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
@@ -131,16 +133,17 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/ram.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-9">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-9">Vui lòng chọn linh kiện</div>
+                                                <div id="price-9" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-9" onclick="loadFragment(9)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
@@ -155,16 +158,17 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/hdd.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-20">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-20">Vui lòng chọn linh kiện</div>
+                                                <div id="price-20" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-20" onclick="loadFragment(20)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
@@ -179,16 +183,17 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/ssd.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-6">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-6">Vui lòng chọn linh kiện</div>
+                                                <div id="price-6" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-6" onclick="loadFragment(6)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
@@ -203,16 +208,17 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/vga.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-12">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-12">Vui lòng chọn linh kiện</div>
+                                                <div id="price-12" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-12" onclick="loadFragment(12)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
@@ -227,16 +233,17 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/psu.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-10">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-10">Vui lòng chọn linh kiện</div>
+                                                <div id="price-10" class="fw-bold text-primary"></div>
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-10" onclick="loadFragment(10)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
@@ -251,20 +258,23 @@
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
                                                     <img src="/client/img/build_pc_images/case.png" alt=""
-                                                        class="w-100 h-100" id="btn-select-7" onclick="loadFragment(7)">
+                                                        class="w-100 h-100" id="image-8">
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div>Vui lòng chọn linh kiện</div>
+                                                <div id="name-8">Vui lòng chọn linh kiện</div>
+                                                <div id="price-8" class="fw-bold text-primary"></div>
+
                                             </div>
 
                                             <div class="col-auto px-2">
-                                                <button type="button" id="btn-select-7" onclick="loadFragment(7)"
+                                                <button type="button" id="btn-select-8" onclick="loadFragment(8)"
                                                     class="btn btn-primary text-light fw-normal">Chọn</button>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Modal Popup -->
                                     <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
                                         <div class="modal-dialog modal-xl" role="document">
                                             <div class="modal-content">
@@ -331,6 +341,7 @@
                                                         </div>
                                                     </c:forEach>
                                                 </div>
+                                                <input type="hidden" id="buildPcData" name="buildPcData">
                                                 <button
                                                     class="btn btn-primary px-4 py-3 text-light text-uppercase m-auto btn-unfocus">
                                                     Tiến Hành Thanh Toán
@@ -361,6 +372,7 @@
 
                         <!-- Template Javascript -->
                         <script src="/client/js/main.js"></script>
+                        <script src="/client/js/build-pc.js"></script>
                 </body>
 
                 </html>

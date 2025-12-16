@@ -3,7 +3,7 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-                <div class="row" style="max-height: 60vh; overflow-y: auto">
+                <div class="row" style="max-height: 80vh; overflow-y: auto">
                     <c:if test="${empty products}">
                         <div class="col-12 text-center p-5">
                             <h5 class="text-muted">Không tìm thấy linh kiện phù hợp với cấu hình hiện tại!</h5>
@@ -12,7 +12,7 @@
                     </c:if>
 
                     <div class="row">
-                        <div class="col-12 col-md-2">
+                        <div class="col-12 col-md-2 overflow-hidden h-100">
                             <div class="row g-4">
                                 <div class="col-12">
                                     <div class="mb-2"><b>Thương hiệu</b></div>
@@ -99,9 +99,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-10 text-center">
+                        <div class="col-12 col-md-10 text-center modal-lg">
                             <div class="row g-4 justify-content-center">
-                                <c:forEach var="p" items="${products}">
+                                <c:forEach var="p" items="${listProducts}">
                                     <div class="col-md-6 col-lg-4 col-xl-3">
 
                                         <!-- Card full height -->
@@ -115,10 +115,6 @@
                                                         style="height:220px; object-fit:cover;" alt="">
                                                 </a>
                                             </div>
-
-                                            <!-- Badge -->
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Hot</div>
 
                                             <!-- Content -->
                                             <div
@@ -144,46 +140,19 @@
                                                         đ
                                                     </p>
 
-                                                    <form method="post" action="/add-product-to-build/${p.id}">
-                                                        <input type="hidden" name="${_csrf.parameterName}"
-                                                            value="${_csrf.token}">
-                                                        <button
-                                                            class="btn border border-primary px-3 text-primary w-100 rounded-pill">
-                                                            Chọn
-                                                        </button>
-                                                    </form>
+                                                    <button
+                                                        class="btn border border-primary px-3 text-primary w-100 rounded-pill btn-select-product"
+                                                        type="button" data-id="${p.id}" data-name="${p.name}"
+                                                        data-price="${p.price}" data-image="${p.image}"
+                                                        data-catid="${categoryId}" onclick="handleSelect(this)">
+                                                        Chọn
+                                                    </button>
                                                 </div>
 
                                             </div>
                                         </div>
-
                                     </div>
                                 </c:forEach>
-
-                                <nav aria-label="Page navigation example" class="col-12">
-                                    <ul class="pagination d-flex justify-content-center">
-                                        <li class="page-item">
-                                            <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                href="/products?page=${currentPage - 1}" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <c:forEach begin="1" end="${totalPages}" varStatus="loop">
-                                            <li class="page-item">
-                                                <a class="${(loop.index) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                    href="/products?page=${loop.index}">
-                                                    ${loop.index}
-                                                </a>
-                                            </li>
-                                        </c:forEach>
-                                        <li class="page-item">
-                                            <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                href="/products?page=${currentPage + 1}" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>

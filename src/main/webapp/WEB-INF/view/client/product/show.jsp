@@ -60,7 +60,7 @@
                         <div class="row g-4">
                             <div class="col-12 col-md-2">
                                 <div class="row g-4">
-                                    <div class="col-12">
+                                    <div class="col-12" id="brandFilter">
                                         <div class="mb-2"><b>Thương hiệu</b></div>
 
                                         <div class="form-check form-check-inline">
@@ -89,7 +89,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12" id="targetFilter">
                                         <div class="mb-2"><b>Nhu cầu</b></div>
 
                                         <div class="form-check form-check-inline">
@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" id="priceFilter">
                                     <div class="mb-2"><b>Mức giá</b></div>
 
                                     <div class="form-check form-check-inline">
@@ -136,30 +136,40 @@
                                 <div class="col-12">
                                     <div class="mb-2"><b>Sắp xếp</b></div>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio-sort" id="sort-1"
+                                            value="gia-tang-dan">
+                                        <label class="form-check-label" for="sort-1">
                                             Giá tăng dần
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios2" value="option2">
-                                        <label class="form-check-label" for="exampleRadios2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio-sort" id="sort-2"
+                                            value="gia-giam-dan">
+                                        <label class="form-check-label" for="sort-2">
                                             Giá giảm dần
                                         </label>
                                     </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio-sort" id="sort-3"
+                                            value="gia-nothing" checked>
+                                        <label class="form-check-label" for="sort-3">
+                                            Không sắp xếp
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn border-secondary rounded-pill" id="btnFilter">
+                                        Lọc sản phẩm
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-12 col-md-10 text-center">
                                 <div class="row g-4 justify-content-center">
                                     <c:forEach var="product" items="${products}">
                                         <div class="col-md-6 col-lg-4 col-xl-3">
-
                                             <!-- Card full height -->
                                             <div class="rounded position-relative fruite-item h-100 d-flex flex-column">
-
                                                 <!-- Image -->
                                                 <div class="fruite-img">
                                                     <a href="/product/${product.id}">
@@ -213,31 +223,32 @@
 
                                         </div>
                                     </c:forEach>
-
-                                    <nav aria-label="Page navigation example" class="col-12">
-                                        <ul class="pagination d-flex justify-content-center">
-                                            <li class="page-item">
-                                                <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                    href="/products?page=${currentPage - 1}" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                                    <c:if test="${param.error != null}">
+                                        <nav aria-label="Page navigation example" class="col-12">
+                                            <ul class="pagination d-flex justify-content-center">
                                                 <li class="page-item">
-                                                    <a class="${(loop.index) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                        href="/products?page=${loop.index}">
-                                                        ${loop.index}
+                                                    <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                                        href="/products?page=${currentPage - 1}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                            </c:forEach>
-                                            <li class="page-item">
-                                                <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                    href="/products?page=${currentPage + 1}" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                                                <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                                                    <li class="page-item">
+                                                        <a class="${(loop.index) eq currentPage ? 'active page-link' : 'page-link'}"
+                                                            href="/products?page=${loop.index}">
+                                                            ${loop.index}
+                                                        </a>
+                                                    </li>
+                                                </c:forEach>
+                                                <li class="page-item">
+                                                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                                        href="/products?page=${currentPage + 1}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

@@ -65,7 +65,7 @@
                                         <i class="fa-solid fa-computer"></i>
                                         <div class="ps-2 text-dark">PC - Máy tính bàn</div>
                                     </a>
-                                    <a href="#" class="d-flex align-items-center">
+                                    <a href="" class="d-flex align-items-center">
                                         <i class="fa-solid fa-microchip"></i>
                                         <div class="ps-2 text-dark">Linh kiện máy tính</div>
                                     </a>
