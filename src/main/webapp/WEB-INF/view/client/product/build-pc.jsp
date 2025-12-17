@@ -82,14 +82,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/cpu.png" alt=""
-                                                        class="w-100 h-100" id="image-7">
+                                                    <c:if test="${not empty selectedCpu}">
+                                                        <img src="/images/product/${selectedCpu.image}"
+                                                            class="w-100 h-100" id="image-7"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedCpu}">
+                                                        <img src="/client/img/build_pc_images/cpu.png"
+                                                            class="w-100 h-100" id="image-7">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-7">Vui lòng chọn linh kiện</div>
-                                                <div id="price-7" class="fw-bold text-primary"></div>
+                                                <div id="name-7">
+                                                    <c:if test="${not empty selectedCpu}">
+                                                        <c:out value="${selectedCpu.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedCpu}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-7" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedCpu}">
+                                                        <fmt:formatNumber value="${selectedCpu.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-7"
+                                                    value="${not empty selectedCpu ? selectedCpu.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -107,14 +129,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/mainboard.82595f5e.png" alt=""
-                                                        class="w-100 h-100" id="image-11">
+                                                    <c:if test="${not empty selectedMainboard}">
+                                                        <img src="/images/product/${selectedMainboard.image}"
+                                                            class="w-100 h-100" id="image-11"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedMainboard}">
+                                                        <img src="/client/img/build_pc_images/mainboard.82595f5e.png"
+                                                            class="w-100 h-100" id="image-11">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-11">Vui lòng chọn linh kiện</div>
-                                                <div id="price-11" class="fw-bold text-primary"></div>
+                                                <div id="name-11">
+                                                    <c:if test="${not empty selectedMainboard}">
+                                                        <c:out value="${selectedMainboard.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedMainboard}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-11" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedMainboard}">
+                                                        <fmt:formatNumber value="${selectedMainboard.price}"
+                                                            type="currency" currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-11"
+                                                    value="${not empty selectedMainboard ? selectedMainboard.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -132,14 +176,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/ram.png" alt=""
-                                                        class="w-100 h-100" id="image-9">
+                                                    <c:if test="${not empty selectedRam}">
+                                                        <img src="/images/product/${selectedRam.image}"
+                                                            class="w-100 h-100" id="image-9"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedRam}">
+                                                        <img src="/client/img/build_pc_images/ram.png"
+                                                            class="w-100 h-100" id="image-9">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-9">Vui lòng chọn linh kiện</div>
-                                                <div id="price-9" class="fw-bold text-primary"></div>
+                                                <div id="name-9">
+                                                    <c:if test="${not empty selectedRam}">
+                                                        <c:out value="${selectedRam.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedRam}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-9" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedRam}">
+                                                        <fmt:formatNumber value="${selectedRam.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-9"
+                                                    value="${not empty selectedRam ? selectedRam.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -157,14 +223,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/hdd.png" alt=""
-                                                        class="w-100 h-100" id="image-20">
+                                                    <c:if test="${not empty selectedHdd}">
+                                                        <img src="/images/product/${selectedHdd.image}"
+                                                            class="w-100 h-100" id="image-20"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedHdd}">
+                                                        <img src="/client/img/build_pc_images/hdd.png"
+                                                            class="w-100 h-100" id="image-20">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-20">Vui lòng chọn linh kiện</div>
-                                                <div id="price-20" class="fw-bold text-primary"></div>
+                                                <div id="name-20">
+                                                    <c:if test="${not empty selectedHdd}">
+                                                        <c:out value="${selectedHdd.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedHdd}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-20" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedHdd}">
+                                                        <fmt:formatNumber value="${selectedHdd.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-20"
+                                                    value="${not empty selectedHdd ? selectedHdd.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -182,14 +270,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/ssd.png" alt=""
-                                                        class="w-100 h-100" id="image-6">
+                                                    <c:if test="${not empty selectedSsd}">
+                                                        <img src="/images/product/${selectedSsd.image}"
+                                                            class="w-100 h-100" id="image-6"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedSsd}">
+                                                        <img src="/client/img/build_pc_images/ssd.png"
+                                                            class="w-100 h-100" id="image-6">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-6">Vui lòng chọn linh kiện</div>
-                                                <div id="price-6" class="fw-bold text-primary"></div>
+                                                <div id="name-6">
+                                                    <c:if test="${not empty selectedSsd}">
+                                                        <c:out value="${selectedSsd.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedSsd}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-6" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedSsd}">
+                                                        <fmt:formatNumber value="${selectedSsd.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-6"
+                                                    value="${not empty selectedSsd ? selectedSsd.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -207,14 +317,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/vga.png" alt=""
-                                                        class="w-100 h-100" id="image-12">
+                                                    <c:if test="${not empty selectedVga}">
+                                                        <img src="/images/product/${selectedVga.image}"
+                                                            class="w-100 h-100" id="image-12"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedVga}">
+                                                        <img src="/client/img/build_pc_images/vga.png"
+                                                            class="w-100 h-100" id="image-12">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-12">Vui lòng chọn linh kiện</div>
-                                                <div id="price-12" class="fw-bold text-primary"></div>
+                                                <div id="name-12">
+                                                    <c:if test="${not empty selectedVga}">
+                                                        <c:out value="${selectedVga.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedVga}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-12" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedVga}">
+                                                        <fmt:formatNumber value="${selectedVga.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-12"
+                                                    value="${not empty selectedVga ? selectedVga.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -232,14 +364,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/psu.png" alt=""
-                                                        class="w-100 h-100" id="image-10">
+                                                    <c:if test="${not empty selectedPsu}">
+                                                        <img src="/images/product/${selectedPsu.image}"
+                                                            class="w-100 h-100" id="image-10"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedPsu}">
+                                                        <img src="/client/img/build_pc_images/psu.png"
+                                                            class="w-100 h-100" id="image-10">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-10">Vui lòng chọn linh kiện</div>
-                                                <div id="price-10" class="fw-bold text-primary"></div>
+                                                <div id="name-10">
+                                                    <c:if test="${not empty selectedPsu}">
+                                                        <c:out value="${selectedPsu.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedPsu}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-10" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedPsu}">
+                                                        <fmt:formatNumber value="${selectedPsu.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-10"
+                                                    value="${not empty selectedPsu ? selectedPsu.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">
@@ -257,15 +411,36 @@
 
                                             <div class="col-auto px-2">
                                                 <div class="border rounded" style="width: 83.41px; height: 85.41px;">
-                                                    <img src="/client/img/build_pc_images/case.png" alt=""
-                                                        class="w-100 h-100" id="image-8">
+                                                    <c:if test="${not empty selectedCase}">
+                                                        <img src="/images/product/${selectedCase.image}"
+                                                            class="w-100 h-100" id="image-8"
+                                                            style="object-fit: contain;">
+                                                    </c:if>
+
+                                                    <c:if test="${empty selectedCase}">
+                                                        <img src="/client/img/build_pc_images/case.png"
+                                                            class="w-100 h-100" id="image-8">
+                                                    </c:if>
                                                 </div>
                                             </div>
 
                                             <div class="col px-2 text-dark">
-                                                <div id="name-8">Vui lòng chọn linh kiện</div>
-                                                <div id="price-8" class="fw-bold text-primary"></div>
-
+                                                <div id="name-8">
+                                                    <c:if test="${not empty selectedCase}">
+                                                        <c:out value="${selectedCase.name}" />
+                                                    </c:if>
+                                                    <c:if test="${empty selectedCase}">
+                                                        Vui lòng chọn linh kiện
+                                                    </c:if>
+                                                </div>
+                                                <div id="price-8" class="fw-bold text-primary">
+                                                    <c:if test="${not empty selectedCase}">
+                                                        <fmt:formatNumber value="${selectedCase.price}" type="currency"
+                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                    </c:if>
+                                                </div>
+                                                <input type="hidden" id="hidden-price-8"
+                                                    value="${not empty selectedCase ? selectedCase.price : 0}">
                                             </div>
 
                                             <div class="col-auto px-2">

@@ -31,7 +31,95 @@ public class PCBuilderController {
     }
 
     @GetMapping("/build-pc")
-    public String getBuildPCPage() {
+    public String getBuildPCPage(Model model, HttpSession session) {
+        // 1. Lấy Session hiện tại
+        BuildPCSession build = (BuildPCSession) session.getAttribute("BUILD_PC");
+
+        // 2. Nếu Session chưa có thì tạo mới (để tránh lỗi null)
+        if (build == null) {
+            build = new BuildPCSession();
+            session.setAttribute("BUILD_PC", build);
+        }
+
+        double totalPrice = 0; // Biến tính tổng tiền
+
+        // 3. Kiểm tra, lấy sản phẩm và CỘNG TIỀN
+
+        // CPU
+        if (build.getCpuId() != null) {
+            Product p = buildPCService.fetchProductById(build.getCpuId());
+            if (p != null) {
+                model.addAttribute("selectedCpu", p);
+                totalPrice += p.getPrice(); // Cộng tiền
+            }
+        }
+
+        // Mainboard
+        if (build.getMainboardId() != null) {
+            Product p = buildPCService.fetchProductById(build.getMainboardId());
+            if (p != null) {
+                model.addAttribute("selectedMainboard", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // RAM
+        if (build.getRamId() != null) {
+            Product p = buildPCService.fetchProductById(build.getRamId());
+            if (p != null) {
+                model.addAttribute("selectedRam", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // HDD
+        if (build.getHddId() != null) {
+            Product p = buildPCService.fetchProductById(build.getHddId());
+            if (p != null) {
+                model.addAttribute("selectedHdd", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // SSD
+        if (build.getSsdId() != null) {
+            Product p = buildPCService.fetchProductById(build.getSsdId());
+            if (p != null) {
+                model.addAttribute("selectedSsd", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // VGA
+        if (build.getVgaId() != null) {
+            Product p = buildPCService.fetchProductById(build.getVgaId());
+            if (p != null) {
+                model.addAttribute("selectedVga", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // PSU
+        if (build.getPsuId() != null) {
+            Product p = buildPCService.fetchProductById(build.getPsuId());
+            if (p != null) {
+                model.addAttribute("selectedPsu", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // Case
+        if (build.getCaseId() != null) {
+            Product p = buildPCService.fetchProductById(build.getCaseId());
+            if (p != null) {
+                model.addAttribute("selectedCase", p);
+                totalPrice += p.getPrice();
+            }
+        }
+
+        // 3. Gửi tổng tiền sang JSP
+        model.addAttribute("totalPrice", totalPrice);
+
         return "client/product/build-pc"; // Trang chính
     }
 
@@ -83,7 +171,8 @@ public class PCBuilderController {
     }
 
     @PostMapping("build-pc/select")
-    public void selectProduct(@RequestParam long categoryId,
+    public void selectProduct(
+            @RequestParam long categoryId,
             @RequestParam long productId,
             HttpSession session) {
         BuildPCSession build = (BuildPCSession) session.getAttribute("BUILD_PC");
@@ -92,12 +181,30 @@ public class PCBuilderController {
             build = new BuildPCSession();
         }
 
-        if (categoryId == 7)
+        // Cập nhật session dựa trên Category ID
+        if (categoryId == 7) {
+            // 1. Chọn CPU
             build.setCpuId(productId);
-        if (categoryId == 11)
+            // -> Bắt buộc Reset Mainboard và RAM trong Session
+            build.setMainboardId(null);
+            build.setRamId(null);
+        } else if (categoryId == 11) {
+            // 2. Chọn Mainboard
             build.setMainboardId(productId);
-        if (categoryId == 9)
+            // -> Bắt buộc Reset RAM (để tránh lệch DDR4/DDR5)
+            build.setRamId(null);
+        } else if (categoryId == 9)
             build.setRamId(productId);
+        else if (categoryId == 20)
+            build.setHddId(productId);
+        else if (categoryId == 6)
+            build.setSsdId(productId);
+        else if (categoryId == 12)
+            build.setVgaId(productId);
+        else if (categoryId == 10)
+            build.setPsuId(productId);
+        else if (categoryId == 8)
+            build.setCaseId(productId);
 
         session.setAttribute("BUILD_PC", build);
     }

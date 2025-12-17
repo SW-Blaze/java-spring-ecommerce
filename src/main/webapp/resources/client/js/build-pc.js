@@ -1,16 +1,13 @@
-// Biến toàn cục lưu trạng thái các linh kiện đã chọn
-let currentBuild = {
-    cpuId: null,
-    mainboardId: null,
-    ramId: null,
-    hddId: null,
-    ssdId: null,
-    vgaId: null,
-    psuId: null,
-    caseId: null,
-};
+// 1. Kiểm tra biến toàn cục từ JSP
+if (typeof currentBuild === 'undefined') {
+    var currentBuild = {
+        cpuId: null, mainboardId: null, ramId: null, hddId: null,
+        ssdId: null, vgaId: null, psuId: null, caseId: null
+    };
+}
 
 let selectedProducts = {};
+let currentCategoryId = null;
 
 function loadFragment(categoryId) {
     console.log("Đang tải danh mục ID: ", categoryId); // Debug
@@ -26,20 +23,12 @@ function loadFragment(categoryId) {
 
     // Nếu chọn mainboard → lấy CPU
     if (categoryId === 11) {
-        baseProductId = selectedProducts[7] || null; // CPU
+        baseProductId = currentBuild.cpuId; // CPU
     }
 
     // Nếu chọn RAM → lấy mainboard
     if (categoryId === 9) {
-        baseProductId = selectedProducts[11] || null; // Mainboard
-    }
-
-    $('#productModal').modal('show');
-
-    let url = `/product-list?categoryId=${categoryId}`;
-
-    if (baseProductId) {
-        url += `&baseProductId=${baseProductId}`;
+        baseProductId = currentBuild.mainboardId; // Mainboard
     }
 
     // Gọi AJAX về Server
@@ -99,139 +88,159 @@ function handleSelect(buttonElement) {
     let btn = $(buttonElement);
 
     // Lấy dữ liệu từ data-attributes
-    let id = btn.attr('data-id');
+    let id = btn.data('id'); // Lấy data-id
+    let catId = btn.data('catid'); // Lấy data-catid
     let name = btn.attr('data-name');
     let image = btn.attr('data-image');
     let price = btn.attr('data-price'); // Có thể là chuỗi hoặc số
-    let catId = btn.data('catid');      // .data() tự ép về số
 
     // Gọi hàm cập nhật giao diện
     selectProduct(id, name, image, price, catId);
 }
 
-// 4. Hàm cập nhật giao diện sau khi chọn
+// 4. Hàm cập nhật giao diện VÀ lưu vào Server
 function selectProduct(id, name, image, price, categoryId) {
-    // Lưu ID vào biến toàn cục
+
+    // --- CẬP NHẬT BIẾN TOÀN CỤC ---
     if (categoryId === 7) currentBuild.cpuId = id;
     if (categoryId === 11) currentBuild.mainboardId = id;
     if (categoryId === 9) currentBuild.ramId = id;
+    if (categoryId === 20) currentBuild.hddId = id;
+    if (categoryId === 6) currentBuild.ssdId = id;
+    if (categoryId === 12) currentBuild.vgaId = id;
+    if (categoryId === 10) currentBuild.psuId = id;
+    if (categoryId === 8) currentBuild.caseId = id;
 
-    // Cập nhật HTML (Ảnh, Tên, Giá)
+    // --- CẬP NHẬT GIAO DIỆN ---
+
+    // 1. Sửa đường dẫn ảnh cho khớp với JSP (QUAN TRỌNG)
     $(`#item-img-${categoryId}`).attr('src', `/images/product/${image}`);
     $(`#item-name-${categoryId}`).text(name).removeClass('text-muted');
 
-    // Format giá tiền Việt Nam
-    let formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+    // 2. Format giá tiền (Bỏ số thập phân)
+    // 'maximumFractionDigits: 0' là tham số để bỏ .00
+    let formattedPrice = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        maximumFractionDigits: 0
+    }).format(price);
+
     $(`#item-price-${categoryId}`).text(formattedPrice);
 
-    // Đổi nút "Chọn" thành "Đổi khác"
-    $(`#btn-select-${categoryId}`).text('Đổi khác').removeClass('btn-primary').addClass('btn-outline-primary');
+    // Cập nhật giá vào input ẩn
+    $(`#hidden-price-${categoryId}`).val(price);
 
-    // Đóng Modal
+    $(`#btn-select-${categoryId}`).text('Đổi');
     $('#productModal').modal('hide');
 
-    // (Tùy chọn) Reset linh kiện phụ thuộc
+    // Reset các slot phụ thuộc (CPU đổi -> Main, Ram đổi)
+    // Trường hợp 1: Nếu đổi CPU (ID 7) -> Reset Mainboard (11) và RAM (9)
     if (categoryId === 7) {
-        // Nếu đổi CPU -> Reset Mainboard và RAM để đảm bảo tương thích
         resetSlot(11);
         resetSlot(9);
     }
+
+    // Trường hợp 2: Nếu đổi Mainboard (ID 11) -> Reset RAM (9)
+    // (Vì Mainboard quyết định khe RAM là DDR4 hay DDR5)
+    if (categoryId === 11) {
+        resetSlot(9);
+    }
+
+    // Tính tổng tiền ngay lập tức
+    calculateTotal();
+
+    // --- GỌI AJAX ---
+    let csrfToken = $('input[name="_csrf"]').val();
+
+    $.ajax({
+        url: "/build-pc/select",
+        type: "POST",
+        data: {
+            categoryId: categoryId,
+            productId: id,
+            _csrf: csrfToken
+        },
+        success: function (res) { console.log("Lưu session OK"); },
+        error: function (e) { console.log("Lỗi session"); }
+    });
 }
 
 // 5. Hàm Reset 1 slot về trạng thái ban đầu
 function resetSlot(categoryId) {
+    // Reset biến logic
     if (categoryId === 11) currentBuild.mainboardId = null;
     if (categoryId === 9) currentBuild.ramId = null;
 
-    $(`#item-img-${categoryId}`).attr('src', 'https://dummyimage.com/100x100/dee2e6/6c757d.jpg');
-    $(`#item-name-${categoryId}`).text('Chưa chọn linh kiện').addClass('text-muted');
+    // Reset giao diện
+    let placeholderImg = "";
+    if (categoryId === 11) placeholderImg = "mainboard.82595f5e.png";
+    else if (categoryId === 9) placeholderImg = "ram.png";
+    else placeholderImg = "cpu.png"; // Fallback
+
+    $(`#item-img-${categoryId}`).attr('src', `/client/img/build_pc_images/${placeholderImg}`);
+    $(`#item-name-${categoryId}`).text('Vui lòng chọn linh kiện').addClass('text-muted');
     $(`#item-price-${categoryId}`).text('0 đ');
-    $(`#btn-select-${categoryId}`).text('Chọn linh kiện').addClass('btn-primary').removeClass('btn-outline-primary');
+    $(`#btn-select-${categoryId}`).text('Chọn').addClass('btn-primary').removeClass('btn-outline-primary');
+
+    // QUAN TRỌNG: Phải set giá trị ẩn về 0
+    $(`#hidden-price-${categoryId}`).val(0);
+
+    // Tính lại tổng tiền ngay sau khi reset
+    calculateTotal();
 }
 
-let buildCart = {
-    items: {}, // key = categoryId
-    total: 0
-};
+// 6. Hàm tính tổng tiền và cập nhật input submit
+function calculateTotal() {
+    let total = 0;
+    // Mảng chứa ID các sản phẩm đã chọn để gửi đi thanh toán
+    let selectedItems = [];
 
-function selectProduct(id, name, image, price, categoryId) {
+    // Danh sách Category ID cần duyệt
+    let categoryIds = [7, 11, 9, 20, 6, 12, 10, 8];
 
-    // 1️⃣ Nếu slot đã có sản phẩm → trừ giá cũ
-    if (buildCart.items[categoryId]) {
-        buildCart.total -= buildCart.items[categoryId].price;
-    }
+    categoryIds.forEach(catId => {
+        // 1. Tính tổng tiền
+        let priceVal = $(`#hidden-price-${catId}`).val();
+        if (priceVal && !isNaN(priceVal)) {
+            total += parseFloat(priceVal);
+        }
 
-    // 2️⃣ Lưu sản phẩm mới
-    buildCart.items[categoryId] = {
-        productId: id,
-        price: Number(price),
-        quantity: 1
-    };
+        // 2. Gom ID sản phẩm (để gửi form thanh toán)
+        // Cần đảm bảo bạn có lưu product ID đâu đó.
+        // Hiện tại code JS của bạn lưu trong currentBuild global variable
+        // Mapping lại theo tên biến trong currentBuild
+        let prodId = null;
+        if (catId === 7) prodId = currentBuild.cpuId;
+        else if (catId === 11) prodId = currentBuild.mainboardId;
+        else if (catId === 9) prodId = currentBuild.ramId;
+        else if (catId === 20) prodId = currentBuild.hddId;
+        else if (catId === 6) prodId = currentBuild.ssdId;
+        else if (catId === 12) prodId = currentBuild.vgaId;
+        else if (catId === 10) prodId = currentBuild.psuId;
+        else if (catId === 8) prodId = currentBuild.caseId;
 
-    // 3️⃣ Cộng tổng
-    buildCart.total += Number(price);
-
-    // 4️⃣ Update UI
-    $(`#image-${categoryId}`).attr('src', `/images/product/${image}`);
-    $(`#name-${categoryId}`).text(name);
-    $(`#price-${categoryId}`).text(
-        new Intl.NumberFormat('vi-VN').format(price) + ' đ'
-    );
-
-    // 5️⃣ Update nút
-    $(`#btn-select-${categoryId}`)
-        .text('Đổi khác')
-        .removeClass('btn-primary')
-        .addClass('btn-outline-primary');
-
-    // 6️⃣ Update tổng tiền
-    updateTotalPrice();
-
-    // 7️⃣ Đóng modal
-    $('#productModal').modal('hide');
-
-    // 8️⃣ Reset phụ thuộc
-    if (categoryId === 7) {
-        resetSlot(11);
-        resetSlot(9);
-    }
-}
-
-function resetSlot(categoryId) {
-    if (buildCart.items[categoryId]) {
-        buildCart.total -= buildCart.items[categoryId].price;
-        delete buildCart.items[categoryId];
-        updateTotalPrice();
-    }
-
-    $(`#image-${categoryId}`).attr('src', 'https://dummyimage.com/100x100/dee2e6/6c757d.jpg');
-    $(`#name-${categoryId}`).text('Vui lòng chọn linh kiện');
-    $(`#price-${categoryId}`).text('');
-    $(`#btn-select-${categoryId}`)
-        .text('Chọn')
-        .addClass('btn-primary')
-        .removeClass('btn-outline-primary');
-}
-
-function updateTotalPrice() {
-    const formatted = new Intl.NumberFormat('vi-VN').format(buildCart.total) + ' đ';
-
-    $('[data-cart-total-price]').each(function () {
-        $(this)
-            .text(formatted)
-            .attr('data-cart-total-price', buildCart.total);
-    });
-}
-
-$('form').on('submit', function () {
-    let payload = [];
-
-    Object.values(buildCart.items).forEach(item => {
-        payload.push({
-            productId: item.productId,
-            quantity: 1
-        });
+        if (prodId && prodId !== 'null') {
+            selectedItems.push({
+                categoryId: catId,
+                productId: prodId
+            });
+        }
     });
 
-    $('#buildPcData').val(JSON.stringify(payload));
+    // 3. Hiển thị tổng tiền ra giao diện (Checkout box)
+    let totalString = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        maximumFractionDigits: 0
+    }).format(total);
+
+    $('[data-cart-total-price]').text(totalString);
+
+    // 4. Cập nhật vào Input ẩn để Submit Form (Quan trọng cho bước Thanh toán)
+    // Chuyển object thành chuỗi JSON để controller xử lý
+    $('#buildPcData').val(JSON.stringify(selectedItems));
+}
+
+$(document).ready(function () {
+    calculateTotal();
 });

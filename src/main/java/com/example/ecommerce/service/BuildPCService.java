@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.domain.Product;
+import com.example.ecommerce.repository.BuildPcRepository;
 import com.example.ecommerce.repository.ProductAttributeRepository;
 import com.example.ecommerce.repository.ProductRepository;
 
@@ -17,10 +18,17 @@ public class BuildPCService {
 
     private final ProductRepository productRepository;
     private final ProductAttributeRepository productAttributeRepository;
+    private final BuildPcRepository buildPcRepository;
 
-    public BuildPCService(ProductRepository productRepository, ProductAttributeRepository productAttributeRepository) {
+    public BuildPCService(ProductRepository productRepository, ProductAttributeRepository productAttributeRepository,
+            BuildPcRepository buildPcRepository) {
         this.productRepository = productRepository;
         this.productAttributeRepository = productAttributeRepository;
+        this.buildPcRepository = buildPcRepository;
+    }
+
+    public Product fetchProductById(long id) {
+        return this.buildPcRepository.findById(id).orElse(null);
     }
 
     public List<Product> filterCompatibleProducts(long categoryId, Long baseProductId, String criteriaName) {

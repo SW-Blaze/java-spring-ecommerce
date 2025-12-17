@@ -294,7 +294,7 @@
         const brands = params.get('brand').split(',');
         brands.forEach(brand => {
 
-        })
+        });
     }
 
 })(jQuery);

@@ -144,7 +144,7 @@
                                                         class="btn border border-primary px-3 text-primary w-100 rounded-pill btn-select-product"
                                                         type="button" data-id="${p.id}" data-name="${p.name}"
                                                         data-price="${p.price}" data-image="${p.image}"
-                                                        data-catid="${categoryId}" onclick="handleSelect(this)">
+                                                        data-catid="${p.category.id}" onclick="handleSelect(this)">
                                                         Chọn
                                                     </button>
                                                 </div>
