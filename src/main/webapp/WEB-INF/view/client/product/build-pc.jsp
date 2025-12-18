@@ -64,9 +64,10 @@
                                 <div class="col-lg-8 text-end px-2">
                                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                                         <li class="nav-item">
-                                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" href="/product">
-                                                <span class="text-dark" style="width: 130px;">Tạo lại</span>
-                                            </a>
+                                            <button class="btn btn-primary text-light fw-normal"
+                                                onclick="resetBuildPc()">
+                                                Tạo lại
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -106,8 +107,8 @@
                                                 </div>
                                                 <div id="price-7" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedCpu}">
-                                                        <fmt:formatNumber value="${selectedCpu.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedCpu.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-7"
@@ -154,7 +155,7 @@
                                                 <div id="price-11" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedMainboard}">
                                                         <fmt:formatNumber value="${selectedMainboard.price}"
-                                                            type="currency" currencySymbol="đ" maxFractionDigits="0" />
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-11"
@@ -200,8 +201,8 @@
                                                 </div>
                                                 <div id="price-9" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedRam}">
-                                                        <fmt:formatNumber value="${selectedRam.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedRam.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-9"
@@ -247,8 +248,8 @@
                                                 </div>
                                                 <div id="price-20" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedHdd}">
-                                                        <fmt:formatNumber value="${selectedHdd.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedHdd.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-20"
@@ -294,8 +295,8 @@
                                                 </div>
                                                 <div id="price-6" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedSsd}">
-                                                        <fmt:formatNumber value="${selectedSsd.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedSsd.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-6"
@@ -341,8 +342,8 @@
                                                 </div>
                                                 <div id="price-12" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedVga}">
-                                                        <fmt:formatNumber value="${selectedVga.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedVga.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-12"
@@ -388,8 +389,8 @@
                                                 </div>
                                                 <div id="price-10" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedPsu}">
-                                                        <fmt:formatNumber value="${selectedPsu.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedPsu.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-10"
@@ -435,8 +436,8 @@
                                                 </div>
                                                 <div id="price-8" class="fw-bold text-primary">
                                                     <c:if test="${not empty selectedCase}">
-                                                        <fmt:formatNumber value="${selectedCase.price}" type="currency"
-                                                            currencySymbol="đ" maxFractionDigits="0" />
+                                                        <fmt:formatNumber value="${selectedCase.price}"
+                                                            maxFractionDigits="0" /> đ
                                                     </c:if>
                                                 </div>
                                                 <input type="hidden" id="hidden-price-8"

@@ -160,7 +160,11 @@ function selectProduct(id, name, image, price, categoryId) {
             productId: id,
             _csrf: csrfToken
         },
-        success: function (res) { console.log("Lưu session OK"); },
+        success: function (res) {
+            console.log("Session updated: " + res);
+            calculateTotal(); // Tính lại tổng tiền
+
+        },
         error: function (e) { console.log("Lỗi session"); }
     });
 }
@@ -172,18 +176,27 @@ function resetSlot(categoryId) {
     if (categoryId === 9) currentBuild.ramId = null;
 
     // Reset giao diện
-    let placeholderImg = "";
+    let placeholderImg = "cpu.png";
     if (categoryId === 11) placeholderImg = "mainboard.82595f5e.png";
     else if (categoryId === 9) placeholderImg = "ram.png";
     else placeholderImg = "cpu.png"; // Fallback
 
-    $(`#item-img-${categoryId}`).attr('src', `/client/img/build_pc_images/${placeholderImg}`);
-    $(`#item-name-${categoryId}`).text('Vui lòng chọn linh kiện').addClass('text-muted');
-    $(`#item-price-${categoryId}`).text('0 đ');
-    $(`#btn-select-${categoryId}`).text('Chọn').addClass('btn-primary').removeClass('btn-outline-primary');
+    $(`#image-${categoryId}`)
+        .attr('src', `/client/img/build_pc_images/${placeholderImg}`);
+    $(`#name-${categoryId}`)
+        .text('Vui lòng chọn linh kiện')
+        .addClass('text-muted');
+    $(`#price-${categoryId}`)
+        .text('0 đ');
 
     // QUAN TRỌNG: Phải set giá trị ẩn về 0
     $(`#hidden-price-${categoryId}`).val(0);
+
+    $(`#btn-select-${categoryId}`)
+        .text('Chọn')
+        .removeClass('btn-outline-primary')
+        .addClass('btn-primary');
+
 
     // Tính lại tổng tiền ngay sau khi reset
     calculateTotal();
@@ -244,3 +257,44 @@ function calculateTotal() {
 $(document).ready(function () {
     calculateTotal();
 });
+
+// Reset tất cả sản phẩm đã chọn
+function resetBuildPc() {
+
+    if (!confirm("Bạn có chắc muốn tạo lại cấu hình không?")) return;
+
+    // 1. Reset biến global
+    currentBuild = {
+        cpuId: null,
+        mainboardId: null,
+        ramId: null,
+        hddId: null,
+        ssdId: null,
+        vgaId: null,
+        psuId: null,
+        caseId: null
+    };
+
+    // 2. Reset toàn bộ slot UI
+    const allCategories = [7, 11, 9, 20, 6, 12, 10, 8];
+    allCategories.forEach(catId => resetSlot(catId));
+
+    // 3. Reset tổng tiền
+    calculateTotal();
+
+    // 4. GỌI SERVER RESET SESSION
+    $.ajax({
+        url: "/build-pc/reset",
+        type: "POST",
+        data: {
+            _csrf: $('input[name="_csrf"]').val()
+        },
+        success: function () {
+            console.log("Build PC session reset");
+        },
+        error: function () {
+            console.error("Reset session failed");
+        }
+    });
+}
+

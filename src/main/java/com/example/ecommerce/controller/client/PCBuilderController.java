@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ecommerce.domain.BuildPCSession;
 import com.example.ecommerce.domain.Product;
@@ -171,7 +172,8 @@ public class PCBuilderController {
     }
 
     @PostMapping("build-pc/select")
-    public void selectProduct(
+    @ResponseBody
+    public String selectProduct(
             @RequestParam long categoryId,
             @RequestParam long productId,
             HttpSession session) {
@@ -207,6 +209,15 @@ public class PCBuilderController {
             build.setCaseId(productId);
 
         session.setAttribute("BUILD_PC", build);
+
+        return "SUCCESS";
+    }
+
+    @PostMapping("/build-pc/reset")
+    @ResponseBody
+    public String resetBuildPc(HttpSession session) {
+        session.removeAttribute("BUILD_PC");
+        return "RESET_OK";
     }
 
 }
