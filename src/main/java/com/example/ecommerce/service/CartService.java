@@ -61,6 +61,7 @@ public class CartService {
             cd.setQuantity(1);
             cd.setPrice(product.getPrice());
 
+            cart.getCartDetails().add(cd);
             cartDetailRepository.save(cd);
 
             // (optional) update sum

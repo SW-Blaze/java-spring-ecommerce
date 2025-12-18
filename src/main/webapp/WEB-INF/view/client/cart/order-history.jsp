@@ -87,12 +87,12 @@
                                                 <c:forEach var="order" items="${orders}">
                                                     <tr>
                                                         <td colspan="2">Order Id: ${order.id}</td>
+                                                        <td colspan="1"></td>
                                                         <td colspan="1">
                                                             <fmt:formatNumber type="number"
                                                                 value="${order.totalPrice}" />
                                                             đ
                                                         </td>
-                                                        <td colspan="1"></td>
                                                         <td colspan="1">${order.status}</td>
                                                     </tr>
                                                     <c:forEach var="orderDetail" items="${order.orderDetails}">

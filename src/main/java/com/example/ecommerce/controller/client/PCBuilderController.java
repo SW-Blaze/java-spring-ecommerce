@@ -268,6 +268,7 @@ public class PCBuilderController {
         cartService.addToCart(build.getPsuId(), cart);
         cartService.addToCart(build.getCaseId(), cart);
 
+        cartService.saveCart(cart);
         // 5: FETCH LẠI CART TỪ DB (SYNC)
         cart = productService.fetchByUser(user);
 
