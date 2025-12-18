@@ -1,5 +1,6 @@
 package com.example.ecommerce.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,10 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ecommerce.domain.BuildPCSession;
+import com.example.ecommerce.domain.Cart;
+import com.example.ecommerce.domain.CartDetail;
 import com.example.ecommerce.domain.Product;
+import com.example.ecommerce.domain.User;
 import com.example.ecommerce.service.BuildPCService;
+import com.example.ecommerce.service.CartService;
 import com.example.ecommerce.service.ProductService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,10 +31,12 @@ public class PCBuilderController {
 
     private final BuildPCService buildPCService;
     private final ProductService productService;
+    private final CartService cartService;
 
-    public PCBuilderController(BuildPCService buildPCService, ProductService productService) {
+    public PCBuilderController(BuildPCService buildPCService, ProductService productService, CartService cartService) {
         this.buildPCService = buildPCService;
         this.productService = productService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/build-pc")
@@ -218,6 +226,55 @@ public class PCBuilderController {
     public String resetBuildPc(HttpSession session) {
         session.removeAttribute("BUILD_PC");
         return "RESET_OK";
+    }
+
+    @PostMapping("/build-pc/checkout")
+    public String buildPcCheckout(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+
+        // 1: CHECK LOGIN
+        if (session == null || session.getAttribute("id") == null) {
+            return "redirect:/login";
+        }
+
+        long userId = (long) session.getAttribute("id");
+
+        User user = new User();
+        user.setId(userId);
+
+        // 2: BUILD PC SESSION
+        BuildPCSession build = (BuildPCSession) session.getAttribute("BUILD_PC");
+        if (build == null) {
+            return "redirect:/build-pc";
+        }
+
+        // 3: LẤY / TẠO CART
+        Cart cart = productService.fetchByUser(user);
+        if (cart == null) {
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setSum(0);
+            cart = cartService.saveCart(cart);
+        }
+
+        // 4: MERGE (SAVE TAY)
+        cartService.addToCart(build.getCpuId(), cart);
+        cartService.addToCart(build.getMainboardId(), cart);
+        cartService.addToCart(build.getRamId(), cart);
+        cartService.addToCart(build.getHddId(), cart);
+        cartService.addToCart(build.getSsdId(), cart);
+        cartService.addToCart(build.getVgaId(), cart);
+        cartService.addToCart(build.getPsuId(), cart);
+        cartService.addToCart(build.getCaseId(), cart);
+
+        // 5: FETCH LẠI CART TỪ DB (SYNC)
+        cart = productService.fetchByUser(user);
+
+        // 6: XÓA BUILD SESSION
+        session.removeAttribute("BUILD_PC");
+
+        return "redirect:/checkout";
     }
 
 }

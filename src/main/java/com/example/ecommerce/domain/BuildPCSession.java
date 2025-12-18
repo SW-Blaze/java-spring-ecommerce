@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class BuildPCSession implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private Long cpuId;
     private Long mainboardId;
     private Long ramId;

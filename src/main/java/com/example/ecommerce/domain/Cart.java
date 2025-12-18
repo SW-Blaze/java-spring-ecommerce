@@ -1,5 +1,7 @@
 package com.example.ecommerce.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -14,7 +16,9 @@ import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "carts")
-public class Cart {
+public class Cart implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +34,7 @@ public class Cart {
 
     // cart_detail_id
     @OneToMany(mappedBy = "cart")
-    List<CartDetail> cartDetails;
+    private List<CartDetail> cartDetails = new ArrayList<>();
 
     public long getId() {
         return id;

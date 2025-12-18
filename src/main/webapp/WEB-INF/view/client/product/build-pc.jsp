@@ -494,35 +494,15 @@
                                                     <fmt:formatNumber type="number" value="${totalPrice}" /> đ
                                                 </p>
                                             </div>
-                                            <form:form action="/confirm-checkout" method="post" modelAttribute="cart"
-                                                class="text-center">
+                                            <form action="/build-pc/checkout" method="post" class="text-center">
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
-                                                <div style="display: none;">
-                                                    <c:forEach var="cartDetail" items="${cart.cartDetails}"
-                                                        varStatus="status">
-                                                        <div class="mb-3">
-                                                            <div class="form-group">
-                                                                <label>Id:</label>
-                                                                <form:input class="form-control" type="text"
-                                                                    value="${cartDetail.id}"
-                                                                    path="cartDetails[${status.index}].id" />
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Quantity:</label>
-                                                                <form:input class="form-control" type="text"
-                                                                    value="${cartDetail.quantity}"
-                                                                    path="cartDetails[${status.index}].quantity" />
-                                                            </div>
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                                <input type="hidden" id="buildPcData" name="buildPcData">
+
                                                 <button
-                                                    class="btn btn-primary px-4 py-3 text-light text-uppercase m-auto btn-unfocus">
+                                                    class="btn btn-primary px-4 py-3 text-light text-uppercase m-auto">
                                                     Tiến Hành Thanh Toán
                                                 </button>
-                                            </form:form>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
