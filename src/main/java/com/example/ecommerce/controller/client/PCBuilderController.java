@@ -271,6 +271,16 @@ public class PCBuilderController {
         // 5: FETCH LẠI CART TỪ DB (SYNC)
         cart = productService.fetchByUser(user);
 
+        int totalQuantity = 0;
+        if (cart != null && cart.getCartDetails() != null) {
+            for (CartDetail cd : cart.getCartDetails()) {
+                totalQuantity += cd.getQuantity();
+            }
+        }
+
+        // ✅ UPDATE SESSION
+        session.setAttribute("sum", totalQuantity);
+
         // 6: XÓA BUILD SESSION
         session.removeAttribute("BUILD_PC");
 
