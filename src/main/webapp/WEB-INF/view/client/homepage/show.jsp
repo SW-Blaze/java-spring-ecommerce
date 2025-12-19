@@ -46,33 +46,40 @@
 
                 <jsp:include page="../layout/header.jsp" />
 
-                <!-- Menu -->
+                <!-- Menu Start -->
                 <div class="container-fluid mt-9 mb-4" style="height: 424px;">
                     <div class="container">
                         <div class="row" style="height: 432px">
                             <!-- CỘT TRÁI: MENU-->
                             <div class="col-2 d-none d-md-block ps-0">
                                 <ul class="list-unstyled">
-                                    <a href="/build-pc" class="d-flex align-items-center">
+                                    <div href="/build-pc" class="d-flex align-items-center">
                                         <i class="fa-solid fa-screwdriver-wrench"></i>
-                                        <div class="ps-2 text-dark">Xây dựng cấu hình</div>
-                                    </a>
-                                    <a href="#" class="d-flex align-items-center">
+                                        <a href="/build-pc" class="ps-2 text-dark">Xây dựng cấu hình</a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-laptop"></i>
-                                        <div class="ps-2 text-dark">Laptop</div>
-                                    </a>
-                                    <a href="#" class="d-flex align-items-center">
+                                        <a href="/category/laptop" class="ps-2 text-dark">Laptop</a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-computer"></i>
-                                        <div class="ps-2 text-dark">PC - Máy tính bàn</div>
-                                    </a>
-                                    <a href="" class="d-flex align-items-center">
+                                        <a href="/category/pc" class="ps-2 text-dark">PC - Máy tính bàn</a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa-solid fa-computer"></i>
+                                        <a href="/category/man-hinh-may-tinh" class="ps-2 text-dark">Màn hình Máy
+                                            tính</a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-microchip"></i>
-                                        <div class="ps-2 text-dark">Linh kiện máy tính</div>
-                                    </a>
-                                    <a href="#" class="d-flex align-items-center">
+                                        <a href="/category/linh-kien-may-tinh" class="ps-2 text-dark">Linh kiện máy
+                                            tính</a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
                                         <i class="fa-regular fa-keyboard"></i>
-                                        <div class="ps-2 text-dark">Phụ kiện máy tính</div>
-                                    </a>
+                                        <a href="/category/phu-kien-may-tinh" class="ps-2 text-dark">Phụ kiện máy
+                                            tính</a>
+                                    </div>
                                 </ul>
                             </div>
 
@@ -135,6 +142,91 @@
                     </div>
                 </div>
                 <!-- End Menu -->
+
+                <!-- Featured Categories Start -->
+                <div class="container-fluid">
+                    <div class="container">
+                        <div class="text-dark fw-bold px-3" style="font-size: 20px;">Danh mục nổi bật</div>
+                        <div class="d-flex justify-content-between pt-2 px-3 pb-4 text-center gap-3">
+                            <div>
+                                <a href="/category/laptop">
+                                    <div>
+                                        <img src="/client/img/featured_categories_images/laptop.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div>Laptop</div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/category/pc">
+                                    <div>
+                                        <img src="/client/img/featured_categories_images/pc.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div>PC</div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/category/linh-kien-may-tinh">
+                                    <div>
+                                        <img src="/client/img/featured_categories_images/linh_kien.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div>Linh Kiện</div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/category/man-hinh-may-tinh">
+                                    <div>
+                                        <img src="/client/img/featured_categories_images/man_hinh.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div>Màn Hình</div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/category/phu-kien-may-tinh">
+                                    <div>
+                                        <img src="/client/img/featured_categories_images/phu_kien.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div>Phụ Kiện</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Featured Categories -->
+
+                <!-- PC Section Start -->
+                <div class="container-fluid">
+                    <div class="container position-relative">
+                        <img src="/client/img/background_product_section.png" alt="" class="img-fluid pc-bg">
+                        <div class="justify-content-between align-items-center mb-2 position-relative d-flex">
+                            <a href="/category/pc">
+                                <div class="text-white">PC</div>
+                            </a>
+                            <a href="/category/pc">
+                                <div class="text-white">Xem tất cả ›</div>
+                            </a>
+                        </div>
+
+                        <!-- Slider -->
+                        <div class="pc-slider position-relative">
+                            <c:forEach items="${pcProducts}" var="p">
+                                <div class="pc-item card">
+                                    <img src="${p.image}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h6>${p.name}</h6>
+                                        <p class="text-danger fw-bold">${p.price} đ</p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PC Section End -->
 
                 <!-- Container Start-->
                 <div class="container-fluid fruite py-5">
@@ -234,7 +326,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Fruits Shop End-->
+                <!-- Container End-->
 
                 <jsp:include page="../layout/feature.jsp" />
 
