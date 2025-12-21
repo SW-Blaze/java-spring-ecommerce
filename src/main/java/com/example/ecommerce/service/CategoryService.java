@@ -1,6 +1,7 @@
 package com.example.ecommerce.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,10 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         return this.categoryRepository.findAll();
+    }
+
+    public Optional<Category> findBySlug(String slug) {
+        return this.categoryRepository.findBySlug(slug);
     }
 
 }

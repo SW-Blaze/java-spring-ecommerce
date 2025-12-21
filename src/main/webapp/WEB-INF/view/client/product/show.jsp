@@ -52,11 +52,21 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm</li>
+                                    <c:if test="${category != null}">
+                                        <li class="breadcrumb-item active">
+                                            ${category.name}
+                                        </li>
+                                    </c:if>
+
+                                    <c:if test="${category == null}">
+                                        <li class="breadcrumb-item active">
+                                            Tất cả sản phẩm
+                                        </li>
+                                    </c:if>
                                 </ol>
                             </nav>
                         </div>
-                        <h1 class="mb-4">Tất cả sản phẩm</h1>
+
                         <div class="row g-4">
                             <div class="col-12 col-md-2">
                                 <div class="row g-4">
@@ -164,8 +174,17 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-10 text-center">
-                                <div class="row g-4 justify-content-center">
+                            <div class="col-12 col-md-10">
+                                <div class="mb-4 fw-bold" style="font-size: 24px; color: #434657;">
+                                    <c:if test="${category != null}">
+                                        ${category.name} (${products.size()} sản phẩm)
+                                    </c:if>
+
+                                    <c:if test="${category == null}">
+                                        Tất cả sản phẩm
+                                    </c:if>
+                                </div>
+                                <div class="row g-4 justify-content-center text-center">
                                     <c:forEach var="product" items="${products}">
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <!-- Card full height -->
@@ -253,9 +272,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
-                </div>
                 </div>
                 <!-- Container End-->
 

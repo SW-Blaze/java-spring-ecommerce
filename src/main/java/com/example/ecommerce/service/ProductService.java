@@ -54,22 +54,37 @@ public class ProductService {
         return this.productRepository.findAll(page);
     }
 
-    public Page<Product> fetchAllProductsWithSpec(ProductCriteriaDTO productCriteriaDTO, Pageable page) {
-        if (productCriteriaDTO.getTarget() == null && productCriteriaDTO.getTarget() == null
-                && productCriteriaDTO.getPrice() == null) {
-            return this.productRepository.findAll(page);
+    public Page<Product> fetchAllProductsWithSpec(
+            ProductCriteriaDTO criteria,
+            Pageable page) {
+
+        Specification<Product> spec = Specification.where(null);
+
+        // 🔹 CATEGORY
+        if (criteria.getCategory() != null && !criteria.getCategory().isBlank()) {
+            spec = spec.and(
+                    ProductSpecs.matchCategory(criteria.getCategory()));
         }
 
-        Specification<Product> combinedSpec = Specification.where(null);
-        if (productCriteriaDTO.getTarget() != null && productCriteriaDTO.getTarget().isPresent()) {
-            Specification<Product> currentSpecs = ProductSpecs.matchListTarget(productCriteriaDTO.getTarget().get());
-            combinedSpec = combinedSpec.and(currentSpecs);
+        // 🔹 TARGET
+        if (criteria.getTarget() != null && !criteria.getTarget().isEmpty()) {
+            spec = spec.and(
+                    ProductSpecs.matchListTarget(criteria.getTarget()));
         }
-        if (productCriteriaDTO.getBrand() != null && productCriteriaDTO.getBrand().isPresent()) {
-            Specification<Product> currentSpecs = ProductSpecs.matchListBrand(productCriteriaDTO.getBrand().get());
-            combinedSpec = combinedSpec.and(currentSpecs);
+
+        // 🔹 BRAND
+        if (criteria.getBrand() != null && !criteria.getBrand().isEmpty()) {
+            spec = spec.and(
+                    ProductSpecs.matchListBrand(criteria.getBrand()));
         }
-        return this.productRepository.findAll(combinedSpec, page);
+
+        // 🔹 PRICE
+        // if (criteria.getPrice() != null && !criteria.getPrice().isBlank()) {
+        // spec = spec.and(
+        // ProductSpecs.matchPrice(criteria.getPrice()));
+        // }
+
+        return productRepository.findAll(spec, page);
     }
 
     // Case 1: Filter products with min price

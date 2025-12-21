@@ -2,7 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!-- Navbar start -->
-        <div class="container-fluid fixed-top bg-white pb-3 shadow">
+        <div class="container-fluid sticky-top bg-white pb-3 header-shadow">
             <div class="container px-0">
                 <nav class="navbar navbar-light navbar-expand-xl row">
                     <!-- LOGO -->

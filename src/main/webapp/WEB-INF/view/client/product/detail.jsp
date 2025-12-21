@@ -288,8 +288,6 @@
                 </div>
                 <!-- Single Product End -->
 
-                <jsp:include page="../layout/feature.jsp" />
-
                 <jsp:include page="../layout/footer.jsp" />
 
                 <!-- Back to Top -->

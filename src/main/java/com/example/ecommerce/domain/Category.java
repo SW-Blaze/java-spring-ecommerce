@@ -2,6 +2,7 @@ package com.example.ecommerce.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +33,9 @@ public class Category {
     // 2. Link đến các con (để lấy danh sách con hiển thị ra menu)
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> children;
+
+    @Column(unique = true)
+    private String slug;
 
     public long getId() {
         return id;
@@ -71,6 +75,14 @@ public class Category {
 
     public void setChildren(List<Category> children) {
         this.children = children;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     @Override

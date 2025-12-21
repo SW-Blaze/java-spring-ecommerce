@@ -2,6 +2,7 @@ package com.example.ecommerce.controller.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ecommerce.domain.Cart;
 import com.example.ecommerce.domain.CartDetail;
+import com.example.ecommerce.domain.Category;
 import com.example.ecommerce.domain.Product;
 import com.example.ecommerce.domain.User;
 import com.example.ecommerce.domain.dto.ProductCriteriaDTO;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,34 +31,36 @@ import jakarta.servlet.http.HttpSession;
 public class ItemController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ItemController(ProductService productService) {
+    public ItemController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
-    @GetMapping("/products")
-    public String getAllProductPage(Model model, ProductCriteriaDTO productCriteriaDTO) {
+    @GetMapping({ "/products", "/category/{slug}" })
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO,
+            @PathVariable(value = "slug", required = false) String slug) {
         int page = 1;
-        try {
-            if (productCriteriaDTO.getPage().isPresent()) {
-                // Convert from string to int
-                page = Integer.parseInt(productCriteriaDTO.getPage().get());
-            } else {
-                // Page = 1
-            }
-        } catch (Exception e) {
-            // Page = 1
-            // TODO: Handle exception
+        if (productCriteriaDTO.getPage() != null) {
+            page = Integer.parseInt(productCriteriaDTO.getPage());
+        }
+
+        // Nếu vào từ /category/{slug}
+        if (slug != null) {
+            productCriteriaDTO.setCategory(slug.toLowerCase());
         }
 
         Pageable pageable = PageRequest.of(page - 1, 60);
-        Page<Product> prs = this.productService.fetchAllProductsWithSpec(productCriteriaDTO,
-                pageable);
-        List<Product> products = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
 
-        model.addAttribute("products", products);
+        Page<Product> prs = productService.fetchAllProductsWithSpec(productCriteriaDTO, pageable);
+        Category category = categoryService.findBySlug(slug).orElse(null);
+
+        model.addAttribute("products", prs.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("category", category); // dùng cho title
+
         return "client/product/show";
     }
 

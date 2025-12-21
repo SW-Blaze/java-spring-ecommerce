@@ -196,10 +196,6 @@
 /*** Navbar End ***/
 
 /* Menu */
-.mt-9 {
-    margin-top: 9rem !important;
-}
-
 .col-slider-banner {
     flex: 0 0 auto;
     width: 66.667%;
@@ -265,6 +261,13 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.header-shadow {
+    z-index: 1050;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+
 
 @media (min-width: 992px) {
 
@@ -362,7 +365,7 @@
 }
 
 .fruite .fruite-item .fruite-img img:hover {
-    transform: scale(1.3);
+    transform: scale(1.1);
 }
 
 /*** Fruits End ***/

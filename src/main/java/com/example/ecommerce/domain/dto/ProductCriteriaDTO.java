@@ -5,49 +5,58 @@ import java.util.Optional;
 
 public class ProductCriteriaDTO {
 
-    private Optional<String> page;
-    private Optional<List<String>> brand;
-    private Optional<List<String>> target;
-    private Optional<List<String>> price;
-    private Optional<String> sort;
+    private String page;
+    private String category;
+    private List<String> brand;
+    private List<String> target;
+    private String price;
+    private String sort;
 
-    public Optional<String> getPage() {
+    public String getPage() {
         return page;
     }
 
-    public void setPage(Optional<String> page) {
+    public void setPage(String page) {
         this.page = page;
     }
 
-    public Optional<List<String>> getBrand() {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public List<String> getBrand() {
         return brand;
     }
 
-    public void setBrand(Optional<List<String>> brand) {
+    public void setBrand(List<String> brand) {
         this.brand = brand;
     }
 
-    public Optional<List<String>> getTarget() {
+    public List<String> getTarget() {
         return target;
     }
 
-    public void setTarget(Optional<List<String>> target) {
+    public void setTarget(List<String> target) {
         this.target = target;
     }
 
-    public Optional<List<String>> getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Optional<List<String>> price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Optional<String> getSort() {
+    public String getSort() {
         return sort;
     }
 
-    public void setSort(Optional<String> sort) {
+    public void setSort(String sort) {
         this.sort = sort;
     }
 

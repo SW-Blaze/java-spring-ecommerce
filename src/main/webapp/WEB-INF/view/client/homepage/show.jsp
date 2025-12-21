@@ -47,7 +47,7 @@
                 <jsp:include page="../layout/header.jsp" />
 
                 <!-- Menu Start -->
-                <div class="container-fluid mt-9 mb-4" style="height: 424px;">
+                <div class="container-fluid mt-3 mb-4" style="height: 424px;">
                     <div class="container">
                         <div class="row" style="height: 432px">
                             <!-- CỘT TRÁI: MENU-->
@@ -212,13 +212,17 @@
                         </div>
 
                         <!-- Slider -->
-                        <div class="pc-slider position-relative">
+                        <div class="pc-slider owl-carousel owl-theme">
                             <c:forEach items="${pcProducts}" var="p">
-                                <div class="pc-item card">
-                                    <img src="${p.image}" class="card-img-top">
-                                    <div class="card-body">
-                                        <h6>${p.name}</h6>
-                                        <p class="text-danger fw-bold">${p.price} đ</p>
+                                <div class="item">
+                                    <div class="card">
+                                        <img src="${p.image}" class="card-img-top">
+                                        <div class="card-body">
+                                            <h6>${p.name}</h6>
+                                            <p class="text-danger fw-bold">
+                                                <fmt:formatNumber value="${p.price}" /> đ
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -328,7 +332,7 @@
                 </div>
                 <!-- Container End-->
 
-                <jsp:include page="../layout/feature.jsp" />
+
 
                 <jsp:include page="../layout/footer.jsp" />
 

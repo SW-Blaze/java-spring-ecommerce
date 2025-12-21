@@ -42,4 +42,10 @@ public class ProductSpecs {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get(Product_.PRICE), min, max);
     }
 
+    public static Specification<Product> matchCategory(String slug) {
+        return (root, query, cb) -> cb.equal(
+                root.get("category").get("slug"),
+                slug);
+    }
+
 }
